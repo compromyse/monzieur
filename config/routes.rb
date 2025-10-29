@@ -14,6 +14,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
-  resources :clients, only: [ :new, :create ]
+  resources :clients, only: [ :new, :create ] do
+    get 'log_visit_form', on: :collection
+    post 'log_visit', on: :collection
+    get 'find', on: :collection
+  end
+
   resources :users, only: [ :new, :create ]
 end

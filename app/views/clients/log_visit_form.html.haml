@@ -1,0 +1,36 @@
+%article
+  %header
+    %b Log a New Visit
+
+  = simple_form_for @visit, url: log_visit_clients_path do |f|
+    = f.input :client_id, input_html: { hidden: true }
+
+    -# TODO: Add client information here once chosen
+
+    %button Scan Client Code
+    %br
+    %br
+
+    %select{ id: 'search', placeholder: 'Search by Name..' }
+    %br
+    %br
+
+    = f.submit
+
+:javascript
+  new TomSelect('#search',{
+          valueField: 'uuid',
+          labelField: 'first_name',
+          searchField: [ 'first_name', 'last_name' ],
+
+          load: function(query, callback) {
+
+            var url = "#{find_clients_path}?q=" + encodeURIComponent(query);
+              fetch(url)
+                  .then(response => response.json())
+                  .then(json => {
+                      callback(json);
+                  })
+
+          },
+      });

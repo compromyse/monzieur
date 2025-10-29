@@ -3,7 +3,7 @@
     %b Client Operations
 
   .grid
-    = button_to "Log a Visit", root_path, method: :get
+    = button_to "Log a Visit", log_visit_form_clients_path, method: :get
     = button_to "Register a New Client", new_client_path, method: :get
 
 - if Current.user.admin?
