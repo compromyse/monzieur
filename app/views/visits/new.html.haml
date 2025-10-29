@@ -11,19 +11,19 @@
       Last Name:
       %span#lastname
 
-  = simple_form_for @visit do |f|
-    = f.input :client_id, label: false, input_html: { hidden: true }
+  %article
+    = simple_form_for @visit do |f|
+      = f.input :client_id, label: false, input_html: { hidden: true }
 
-    .grid#inputs
-      -# TODO: Scan functionality
-      - if false
-        %button Scan Client Code
-      %select{ id: 'search', placeholder: 'Search by Name..' }
+      .grid#inputs
+        -# TODO: Scan functionality
+        - if false
+          %button Scan Client Code
+        %select{ id: 'search', placeholder: 'Search by Name..' }
 
-    %br
-    %br
+      %br
 
-    = f.submit
+      = f.submit
 
 :javascript
   new TomSelect('#search',{
