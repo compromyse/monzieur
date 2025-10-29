@@ -2,7 +2,7 @@
   %header
     %b Log a New Visit
 
-  = simple_form_for @visit, url: log_visit_clients_path do |f|
+  = simple_form_for @visit do |f|
     = f.input :client_id, input_html: { hidden: true }
 
     -# TODO: Add client information here once chosen

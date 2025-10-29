@@ -15,10 +15,9 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :clients, only: [ :new, :create ] do
-    get 'log_visit_form', on: :collection
-    post 'log_visit', on: :collection
     get 'find', on: :collection
   end
 
+  resources :visits, only: [ :new, :create ]
   resources :users, only: [ :new, :create ]
 end

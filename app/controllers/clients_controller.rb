@@ -23,32 +23,12 @@ class ClientsController < ApplicationController
     render json: json
   end
 
-  def log_visit_form
-    @visit = Visit.new
-  end
-
-  def log_visit
-    @visit = Visit.new(visit_params)
-
-    if @visit.save
-      redirect_to root_path, notice: 'Visit Logged!'
-    else
-      render :log_visit_form, status: :unprocessable_entity
-    end
-  end
-
   private
 
   def client_params
     params.require(:client).permit(
       :first_name,
       :last_name,
-    )
-  end
-
-  def visit_params
-    params.require(:visit).permit(
-      :client_id,
     )
   end
 end
