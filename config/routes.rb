@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :clients, only: [ :new, :create ]
+  resources :users, only: [ :new, :create ]
 end

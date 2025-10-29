@@ -5,4 +5,12 @@ class ApplicationController < ActionController::Base
 
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
+
+  private
+  
+  def admin_only!
+    if not Current.user.admin?
+      redirect_to root_path, alert: 'Admin access only!'
+    end
+  end
 end

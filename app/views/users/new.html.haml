@@ -1,0 +1,9 @@
+%article
+  %header
+    %b Create a New User
+
+  = simple_form_for @user do |f|
+    = f.input :email_address
+    = f.input :password
+
+    = f.submit
