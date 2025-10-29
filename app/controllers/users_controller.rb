@@ -6,13 +6,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
+    @user = User.new(user_params)
 
-    if user.save
-      return redirect_to root_path, notice: 'User Created!'
+    if @user.save
+      redirect_to root_path, notice: 'User Created!'
+    else
+      render :new, status: :unprocessable_entity
     end
-
-    redirect_to root_path, alert: 'Unable to Create User.'
   end
 
   private
