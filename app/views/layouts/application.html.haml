@@ -18,4 +18,17 @@
     %link{:href => "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.sand.min.css", :rel => "stylesheet"}/
   %body
     %main.container
+
+      - if flash[:notice].present?
+        %article
+          .grid
+            %textarea{ 'aria-invalid': 'false', readonly: true, style: 'resize: none;' }
+              = flash[:notice]
+
+      - if flash[:alert].present?
+        %article
+          .grid
+            %textarea{ 'aria-invalid': 'true', readonly: true, style: 'resize: none;' }
+              = flash[:alert]
+
       = yield
