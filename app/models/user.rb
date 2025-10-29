@@ -4,5 +4,5 @@ class User < ApplicationRecord
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
-  enum :role, %i[ normie admin ]
+  enum :role, %i[ staff admin ]
 end
