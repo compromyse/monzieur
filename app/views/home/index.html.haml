@@ -1,2 +1,15 @@
 %article
-  Heyya!
+  %header
+    %b Client Operations
+
+  .grid
+    = button_to "Log a Visit", root_path
+    = button_to "Register a New Client", root_path
+
+- if Current.user.admin?
+  %article
+    %header
+      %b Admin Operations (only visible to admins)
+
+    .grid
+      = button_to "Create New User", root_path
