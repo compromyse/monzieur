@@ -14,10 +14,10 @@
   = simple_form_for @visit do |f|
     = f.input :client_id, label: false, input_html: { hidden: true }
 
-    -# TODO: Add client information here once chosen
-
     .grid#inputs
-      %button Scan Client Code
+      -# TODO: Scan functionality
+      - if false
+        %button Scan Client Code
       %select{ id: 'search', placeholder: 'Search by Name..' }
 
     %br
