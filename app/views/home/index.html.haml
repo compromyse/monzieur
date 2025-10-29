@@ -3,8 +3,8 @@
     %b Client Operations
 
   .grid
-    = button_to "Log a Visit", root_path
-    = button_to "Register a New Client", root_path
+    = button_to "Log a Visit", root_path, class: 'contrast'
+    = button_to "Register a New Client", root_path, class: 'contrast'
 
 - if Current.user.admin?
   %article
@@ -12,4 +12,4 @@
       %b Admin Operations (only visible to admins)
 
     .grid
-      = button_to "Create New User", root_path
+      = button_to "Create New User", root_path, class: 'contrast'
