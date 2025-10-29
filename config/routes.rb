@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :clients, only: [ :new, :create ] do
     get 'find', on: :collection
+    get 'info', on: :collection
   end
 
   resources :visits, only: [ :new, :create ]

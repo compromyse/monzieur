@@ -23,6 +23,17 @@ class ClientsController < ApplicationController
     render json: json
   end
 
+  def info
+    uuid = params[:uuid]
+    c = Client.find_by(uuid: uuid)
+
+    render json: {
+      id: c.id,
+      first_name: c.first_name,
+      last_name: c.last_name,
+    }
+  end
+
   private
 
   def client_params

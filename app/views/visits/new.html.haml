@@ -2,12 +2,21 @@
   %header
     %b Log a New Visit
 
+  %article#clientinfo{ style: 'display: none;' }
+    %p
+      First Name:
+      %span#firstname
+
+    %p
+      Last Name:
+      %span#lastname
+
   = simple_form_for @visit do |f|
-    = f.input :client_id, input_html: { hidden: true }
+    = f.input :client_id, label: false, input_html: { hidden: true }
 
     -# TODO: Add client information here once chosen
 
-    .grid
+    .grid#inputs
       %button Scan Client Code
       %select{ id: 'search', placeholder: 'Search by Name..' }
 
@@ -32,4 +41,19 @@
                   })
 
           },
+          
+          onItemAdd: function(uuid) {
+            var url = "#{info_clients_path}?uuid=" + encodeURIComponent(uuid);
+              fetch(url)
+                  .then(response => response.json())
+                  .then(json => {
+                    document.getElementById('inputs').hidden = true;
+                    document.getElementById('clientinfo').style.display = "block";
+
+                    document.getElementById('visit_client_id').value = json.id;
+                    document.getElementById('firstname').innerHTML = json.first_name;
+                    document.getElementById('lastname').innerHTML = json.last_name;
+                  })
+          },
+
       });
