@@ -1,6 +1,8 @@
 class ClientsController < ApplicationController
 
-  def new; end
+  def new
+    @client = Client.new
+  end
 
   def create
     debugger
