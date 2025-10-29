@@ -8,7 +8,7 @@ class ClientsController < ApplicationController
     @client = Client.new(client_params)
 
     if @client.save
-      return redirect_to root_path, notice: 'Client Created!'
+      redirect_to root_path, notice: 'Client Created!'
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,7 +27,15 @@ class ClientsController < ApplicationController
     @visit = Visit.new
   end
 
-  def log_visit; end
+  def log_visit
+    @visit = Visit.new(visit_params)
+
+    if @visit.save
+      redirect_to root_path, notice: 'Visit Logged!'
+    else
+      render :log_visit_form, status: :unprocessable_entity
+    end
+  end
 
   private
 
@@ -35,6 +43,12 @@ class ClientsController < ApplicationController
     params.require(:client).permit(
       :first_name,
       :last_name,
+    )
+  end
+
+  def visit_params
+    params.require(:visit).permit(
+      :client_id,
     )
   end
 end
