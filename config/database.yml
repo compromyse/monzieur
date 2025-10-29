@@ -13,6 +13,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   database: monzieur
+  host: <%= Dir.pwd %>/pgdata
   <<: *default
 
 
