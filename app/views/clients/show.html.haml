@@ -4,33 +4,32 @@
     = link_to "EDIT", edit_client_path(id: @client.id)
 
   %p
-    %span
-      First Name:
-      = @client.first_name
+    First Name:
+    = @client.first_name
 
   %p
-    %span
-      Last Name:
-      = @client.last_name
+    Last Name:
+    = @client.last_name
 
   %p
-    %span
-      Mobile Number:
-      = @client.mobile_number
+    Mobile Number:
+    = @client.mobile_number
 
   %p
-    %span
-      Address:
-      = @client.address or '-'
+    Address:
+    = @client.address or '-'
+
+  %p
+    Last Visit:
+    = @client.last_visit
 
   %h3 Household Members
   
   %p
-    %span
-      Total:
-      = @client.household_members.count + 1
+    Total:
+    = @client.household_members.count + 1
 
-      (incl. client)
+    (incl. client)
 
   %table
     %thead
@@ -43,7 +42,12 @@
         %tr
           %td= member.first_name
           %td= member.last_name
-          %td= member.member_type
+          %td= HouseholdMember::MEMBER_TYPES[member.member_type.to_sym]
+
+  %p
+    Notes:
+  %p
+    = @client.notes
 
   %br
 
