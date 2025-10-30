@@ -1,9 +1,5 @@
 class VisitsController < ApplicationController
 
-  def new
-    @visit = Visit.new
-  end
-
   def create
     @visit = Visit.new(visit_params)
 

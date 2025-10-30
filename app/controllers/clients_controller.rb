@@ -15,7 +15,11 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @client = Client.includes(:household_members).find(params[:uuid])
+    @client = Client.includes(:household_members).find_by(uuid: params[:uuid])
+
+    if @client.nil?
+      redirect_back fallback_location: root_path, alert: 'Client not found!'
+    end
   end
 
   def find
