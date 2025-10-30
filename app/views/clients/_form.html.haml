@@ -12,18 +12,26 @@
     %th First Name
     %th Last Name
     %th Member Type
+    %th Actions
 
   %tbody{ 'data-nested-fields-target': 'fields' }
+    - @client.household_members.each do |member|
+      %tr
+        = simple_fields_for 'client[household_members_attributes][]', member, index: member.id do |hm_f|
+          = hm_f.hidden_field :id
+          = hm_f.hidden_field :_destroy
+          = render 'form_household_members', hm_f: hm_f
+
+          %td
+            %button{ data: { action: 'nested-fields#remove' } } Remove
 
   %template{ 'data-nested-fields-target': 'template' }
     %tr
       = simple_fields_for 'client[household_members_attributes][]', HouseholdMember.new, index: '__INDEX__' do |hm_f|
+        = render 'form_household_members', hm_f: hm_f
+
         %td
-          = hm_f.input :first_name, label: false
-        %td
-          = hm_f.input :last_name, label: false
-        %td
-          = hm_f.collection_radio_buttons :member_type, HouseholdMember::MEMBER_TYPES, :first, :last, label: false
+          %button{ data: { action: 'nested-fields#remove' } } Remove
 
 = button_tag "Add Member", type: :button, data: { action: "nested-fields#append" }
 

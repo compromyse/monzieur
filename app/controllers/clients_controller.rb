@@ -22,6 +22,19 @@ class ClientsController < ApplicationController
     end
   end
 
+  def edit
+    @client = Client.find(params[:id])
+  end
+
+  def update
+    @client = Client.find(params[:id])
+    if @client.update(client_params)
+      redirect_to show_clients_path(uuid: @client.uuid), notice: 'Client Updated!'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def find
     query = params[:q].downcase
     json = Client.where('lower(first_name) LIKE ? OR lower(last_name) LIKE ? OR mobile_number = ?', query, query, query)
@@ -44,6 +57,8 @@ class ClientsController < ApplicationController
         :first_name,
         :last_name,
         :member_type,
+        :id,
+        :_destroy,
       ],
     )
   end

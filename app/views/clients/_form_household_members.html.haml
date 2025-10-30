@@ -1,0 +1,6 @@
+%td
+  = hm_f.input :first_name, label: false
+%td
+  = hm_f.input :last_name, label: false
+%td
+  = hm_f.collection_radio_buttons :member_type, HouseholdMember::MEMBER_TYPES, :first, :last, label: false

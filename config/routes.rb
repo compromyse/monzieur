@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
-  resources :clients, only: [ :new ] do
+  resources :clients, only: [ :new, :edit, :update ] do
     post 'create', on: :collection
     get 'show', on: :collection, as: 'show'
     get 'find', on: :collection
