@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :clients, only: [ :new ] do
     post 'create', on: :collection
-    get 'show', on: :collection
+    get 'show', on: :collection, as: 'show'
     get 'find', on: :collection
     get 'info', on: :collection
   end
