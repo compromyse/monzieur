@@ -25,7 +25,7 @@ class ClientsController < ApplicationController
   def find
     query = params[:q].downcase
     json = Client.where('lower(first_name) LIKE ? OR lower(last_name) LIKE ? OR mobile_number = ?', query, query, query)
-      .select(:uuid, :first_name, :last_name)
+      .select(:uuid, :first_name, :last_name, :mobile_number)
       .as_json
 
     render json: json

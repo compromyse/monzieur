@@ -1,0 +1,34 @@
+%h3 Client Information
+
+.grid
+  = f.input :first_name
+  = f.input :last_name
+= f.input :mobile_number
+= f.input :address
+
+%h3 Household Members
+%table
+  %thead
+    %th First Name
+    %th Last Name
+    %th Member Type
+
+  %tbody{ 'data-nested-fields-target': 'fields' }
+
+  %template{ 'data-nested-fields-target': 'template' }
+    %tr
+      = simple_fields_for 'client[household_members_attributes][]', HouseholdMember.new, index: '__INDEX__' do |hm_f|
+        %td
+          = hm_f.input :first_name, label: false
+        %td
+          = hm_f.input :last_name, label: false
+        %td
+          = hm_f.collection_radio_buttons :member_type, HouseholdMember::MEMBER_TYPES, :first, :last, label: false
+
+= button_tag "Add Member", type: :button, data: { action: "nested-fields#append" }
+
+= f.input :notes, as: :text
+
+%br
+%br
+= f.submit
