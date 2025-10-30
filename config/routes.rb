@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :clients, only: [ :new, :create ] do
+    get 'show', on: :collection
     get 'find', on: :collection
     get 'info', on: :collection
   end

@@ -14,6 +14,10 @@ class ClientsController < ApplicationController
     end
   end
 
+  def show
+    @client = Client.includes(:household_members).find(params[:id])
+  end
+
   def find
     query = params[:q].downcase
     json = Client.where('lower(first_name) LIKE ? OR lower(last_name) LIKE ? OR mobile_number = ?', query, query, query)

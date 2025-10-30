@@ -1,0 +1,40 @@
+%article
+  %header
+    %b Client Information
+
+  %p
+    %span
+      First Name:
+      = @client.first_name
+
+  %p
+    %span
+      Last Name:
+      = @client.last_name
+
+  %p
+    %span
+      Mobile Number:
+      = @client.mobile_number
+
+  %h3 Household Members
+  
+  %p
+    %span
+      Total:
+      = @client.household_members.count + 1
+
+      (incl. client)
+
+  %table
+    %thead
+      %th First Name
+      %th Last Name
+      %th Member Type
+
+    %tbody
+      - @client.household_members.each do |member|
+        %tr
+          %td= member.first_name
+          %td= member.last_name
+          %td= member.member_type
