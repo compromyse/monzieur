@@ -2,6 +2,14 @@
   %header
     %b Client Operations
 
+  %article#searcharticle
+    .grid
+      -# TODO: Scan functionality
+      - if Rails.env.development?
+        %button Scan Client Code
+
+      %select{ id: 'search', placeholder: 'Search by Name or Mobile Number..' }
+
   .grid
     = button_to "Register a New Client", new_client_path, method: :get
 
@@ -12,3 +20,28 @@
 
     .grid
       = button_to "Create New User", new_user_path, method: :get
+
+:javascript
+  new TomSelect('#search',{
+          valueField: 'uuid',
+          labelField: 'first_name',
+          searchField: [ 'first_name', 'last_name' ],
+
+          load: function(query, callback) {
+
+            var url = "#{find_clients_path}?q=" + encodeURIComponent(query);
+              fetch(url)
+                  .then(response => response.json())
+                  .then(json => {
+                      callback(json);
+                  })
+
+          },
+          
+          onItemAdd: function(uuid) {
+            document.getElementById('searcharticle').innerHTML = ''
+            document.getElementById('searcharticle').ariaBusy = 'true'
+            window.location.href = "#{clients_path}?uuid=" + uuid;
+          },
+
+      });
