@@ -23,6 +23,13 @@
   %body
     %main.container
 
+      - if authenticated?
+        %nav
+          %ul
+            %li
+              %b
+                = link_to "Monzieur", root_path
+
       - if flash[:notice].present?
         %article
           .grid
