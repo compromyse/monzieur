@@ -4,5 +4,11 @@ class HouseholdMember < ApplicationRecord
   #                      < 2    2-5     6-17  18-59 60+
   enum :member_type, %i[ infant toddler child adult senior ]
 
-  MEMBER_TYPES = Hash[HouseholdMember.member_types.keys.map { |v| [v, v] } ]
+  MEMBER_TYPES = {
+    infant: 'Infant (< 2)',
+    toddler: 'Toddler (2-5)',
+    child: 'Child (6-17)',
+    adult: 'Adult (18-59)',
+    senior: 'Senior (60+)',
+  }
 end
