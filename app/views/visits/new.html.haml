@@ -17,7 +17,7 @@
 
       .grid#inputs
         -# TODO: Scan functionality
-        - if false
+        - if Rails.env.development?
           %button Scan Client Code
         %select{ id: 'search', placeholder: 'Search by Name..' }
 
