@@ -38,3 +38,7 @@
           %td= member.first_name
           %td= member.last_name
           %td= member.member_type
+
+  %br
+
+  = button_to "Log Visit", visits_path(visit: { client_id: @client.id }), data: { 'turbo-confirm': 'Are you sure?' }

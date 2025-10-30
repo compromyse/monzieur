@@ -20,6 +20,6 @@ Rails.application.routes.draw do
     get 'info', on: :collection
   end
 
-  resources :visits, only: [ :new, :create ]
+  resources :visits, only: [ :create ]
   resources :users, only: [ :new, :create ]
 end
