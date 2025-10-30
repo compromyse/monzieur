@@ -15,7 +15,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @client = Client.includes(:household_members).find(params[:id])
+    @client = Client.includes(:household_members).find(params[:uuid])
   end
 
   def find
