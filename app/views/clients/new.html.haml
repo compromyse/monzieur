@@ -2,8 +2,36 @@
   %header
     %b Register a New Client
 
-  = simple_form_for @client do |f|
-    = f.input :first_name
-    = f.input :last_name
+  = simple_form_for @client, data: { controller: 'nested-fields' } do |f|
+    %h3 Client Information
 
+    .grid
+      = f.input :first_name
+      = f.input :last_name
+    = f.input :mobile_number
+
+    %h3 Household Members
+    -# TODO: first_name last_name member_type
+    %table
+      %thead
+        %th First Name
+        %th Last Name
+        %th Member Type
+
+      %tbody{ 'data-nested-fields-target': 'fields' }
+
+      %template{ 'data-nested-fields-target': 'template' }
+        %tr
+          = simple_fields_for 'client[household_members_attributes][]', HouseholdMember.new, index: '__INDEX__' do |hm_f|
+            %td
+              = hm_f.input :first_name, label: false
+            %td
+              = hm_f.input :last_name, label: false
+            %td
+              = hm_f.collection_radio_buttons :member_type, HouseholdMember::MEMBER_TYPES, :first, :last, label: false
+
+    = button_tag "Add Member", type: :button, data: { action: "nested-fields#append" }
+
+    %br
+    %br
     = f.submit

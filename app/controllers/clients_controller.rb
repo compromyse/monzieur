@@ -40,6 +40,12 @@ class ClientsController < ApplicationController
     params.require(:client).permit(
       :first_name,
       :last_name,
+      :mobile_number,
+      household_members_attributes: [
+        :first_name,
+        :last_name,
+        :member_type,
+      ],
     )
   end
 end
