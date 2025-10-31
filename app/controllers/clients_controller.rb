@@ -48,9 +48,7 @@ class ClientsController < ApplicationController
   end
 
   def visit_history
-    client = Client
-                .includes(:household_members, :visits)
-                .find_by(uuid: params[:uuid])
+    client = Client.find_by(uuid: params[:uuid])
 
     @visits = client.visit_history
   end
