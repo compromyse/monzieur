@@ -29,6 +29,9 @@
             %li
               %b
                 = link_to "Monzieur", root_path
+          %ul
+            %li
+              = link_to "Log Out", session_path, data: { turbo_method: :delete }
 
       - if flash[:notice].present?
         %article
