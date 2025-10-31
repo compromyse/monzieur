@@ -15,7 +15,9 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @client = Client.includes(:household_members).find_by(uuid: params[:uuid])
+    @client = Client
+                .includes(:household_members, :visits)
+                .find_by(uuid: params[:uuid])
 
     if @client.nil?
       redirect_back fallback_location: root_path, alert: 'Client not found!'
@@ -42,6 +44,14 @@ class ClientsController < ApplicationController
       .as_json
 
     render json: json
+  end
+
+  def visit_history
+    client = Client
+                .includes(:household_members, :visits)
+                .find_by(uuid: params[:uuid])
+
+    @visits = client.visit_history
   end
 
   private

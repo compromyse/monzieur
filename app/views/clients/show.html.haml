@@ -52,3 +52,8 @@
   %br
 
   = button_to "Log Visit", visits_path(visit: { client_id: @client.id }), data: { 'turbo-confirm': 'Are you sure?' }
+
+%details
+  %summary View History
+
+  = turbo_frame_tag "show_history", src: visit_history_clients_path(uuid: @client.uuid, format: :turbo_stream), action: :replace, loading: :lazy

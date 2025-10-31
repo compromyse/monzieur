@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get 'show', on: :collection, as: 'show'
     get 'find', on: :collection
     get 'info', on: :collection
+    get 'visit_history', on: :collection
   end
 
   resources :visits, only: [ :create ]

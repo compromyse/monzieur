@@ -1,0 +1,13 @@
+= turbo_stream.replace 'show_history' do
+  %article
+    %header
+      %b Visit History
+    
+    - @visits.each do |year, months|
+      %b= year
+
+      - months.each do |month, dates|
+        %p
+          = "#{month} (#{dates.count}):"
+          - dates.each do |date|
+            = date.day

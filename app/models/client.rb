@@ -10,4 +10,16 @@ class Client < ApplicationRecord
 
     v.created_at.to_date.to_fs(:long) or '-'
   end
+
+  def visit_history
+    vs = visits
+          .order(created_at: :desc)
+          .pluck(:created_at)
+
+    Hash[
+      vs.group_by(&:year).map{|y, items|
+        [y, items.group_by { |d| d.strftime('%B') } ]
+      }
+    ]
+  end
 end
