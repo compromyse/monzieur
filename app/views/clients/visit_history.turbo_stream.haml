@@ -7,4 +7,4 @@
         %p
           = "#{month} (#{dates.count}):"
           - dates.each do |date|
-            = date.day
+            = date.day.ordinalize
