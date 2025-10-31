@@ -1,8 +1,5 @@
 = turbo_stream.replace 'show_history' do
   %article
-    %header
-      %b Visit History
-
     - @visits.each do |year, months|
       %b= year
 
