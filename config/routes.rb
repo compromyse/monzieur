@@ -21,6 +21,6 @@ Rails.application.routes.draw do
     get 'visit_history', on: :collection
   end
 
-  resources :visits, only: [ :create ]
+  resources :visits, only: [ :create, :index ]
   resources :users, only: [ :new, :create ]
 end

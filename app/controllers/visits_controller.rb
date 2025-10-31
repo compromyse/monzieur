@@ -10,6 +10,18 @@ class VisitsController < ApplicationController
     end
   end
 
+  def index
+    if params[:date].present?
+      date = Date.strptime(params[:date], "%Y-%m-%d")
+    else
+      date = Date.today
+    end
+
+    @visits = Visit.includes(:client)
+      .where(created_at: date.all_day)
+      .order(created_at: :desc)
+  end
+
   private
 
   def visit_params

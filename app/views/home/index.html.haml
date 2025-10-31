@@ -2,6 +2,8 @@
   %header
     %b Client Operations
 
+  %h6= "#{@visit_count} visits today!"
+
   %article#searcharticle
     .grid
       -# TODO: Scan functionality
@@ -12,6 +14,8 @@
 
   .grid
     = button_to "Register a New Client", new_client_path, method: :get
+
+  = button_to "Visit History", visits_path, method: :get
 
 - if Current.user.admin?
   %article
