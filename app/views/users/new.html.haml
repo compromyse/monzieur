@@ -3,7 +3,8 @@
     %b Create a New User
 
   = simple_form_for @user do |f|
-    = f.input :email_address
+    = f.input :username
     = f.input :password
+    = f.input :role, as: :select, collection: User.roles.keys, default: :staff
 
     = f.submit
