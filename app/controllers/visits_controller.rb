@@ -4,7 +4,7 @@ class VisitsController < ApplicationController
     @visit = Visit.new(visit_params)
 
     if @visit.save
-      redirect_to root_path, notice: 'Visit Logged!'
+      redirect_to dashboard_index_path, notice: 'Visit Logged!'
     else
       render :new, status: :unprocessable_entity
     end

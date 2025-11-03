@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   
   def admin_only!
     if not Current.user.admin?
-      redirect_to root_path, alert: 'Admin access only!'
+      redirect_to dashboard_index_path, alert: 'Admin access only!'
     end
   end
 end
