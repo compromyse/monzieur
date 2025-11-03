@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_31_215930) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_03_175602) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -26,6 +26,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_31_215930) do
     t.index ["first_name"], name: "index_clients_on_first_name"
     t.index ["last_name"], name: "index_clients_on_last_name"
     t.index ["mobile_number"], name: "index_clients_on_mobile_number", unique: true
+    t.index ["uuid"], name: "index_clients_on_uuid", unique: true
   end
 
   create_table "household_members", force: :cascade do |t|
@@ -60,6 +61,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_31_215930) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_visits_on_client_id"
+    t.index ["created_at"], name: "index_visits_on_created_at"
   end
 
   add_foreign_key "household_members", "clients"
