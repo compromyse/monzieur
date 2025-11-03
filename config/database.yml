@@ -19,4 +19,4 @@ test:
 
 production:
   <<: *default
-  database: monzieur_prod # TODO: update
+  url: <%= ENV['DATABASE_URL'] %>
