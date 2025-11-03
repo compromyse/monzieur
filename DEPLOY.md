@@ -36,6 +36,9 @@ dokku letsencrypt:cron-job --add
 
 dokku config:set monzieur RAILS_MASTER_KEY=$KEY
 
+rm $HOME/.bash_history
+ln -s /dev/null $HOME/.bash_history
+
 # from your local machine
 git clone https://git.compromyse.xyz/monzieur.git
 git remote add dokku dokku@$DOMAIN:monzieur
