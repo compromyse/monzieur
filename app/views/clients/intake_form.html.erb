@@ -58,7 +58,7 @@
 <p>Phone Number: <%= @client.mobile_number %></p>
 
 <div class="form-section">
-  <p>Total individuals in household: <%= @client.household_members.count %></p>
+  <p>Total individuals in household: <%= @household_member_counts.values.count %></p>
   <% HouseholdMember::MEMBER_TYPES.each do |key, value| %>
     <%= value %>
     &nbsp;
