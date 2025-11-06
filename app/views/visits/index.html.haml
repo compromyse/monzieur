@@ -1,25 +1,39 @@
+:css
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+  }
+
 %article
   %header
     %b Visit History
 
-  = form_with url: url_for, method: :get do |f|
-    .grid
-      = f.date_field :date, value: (params[:date] or Date.today.strftime("%Y-%m-%d"))
-      = f.submit 'Select'
+  .no-print
+    = form_with url: url_for, method: :get do |f|
+      .grid
+        = f.date_field :date, value: (params[:date] or Date.today.strftime("%Y-%m-%d"))
+        = f.submit 'Select'
 
-  %article
-    %h5
-      Total Visits:
-      = @visits.count
+  %h5
+    Date:
+    = params[:date] or Date.today.strftime("%Y-%m-%d")
+  %h5
+    Total Visits:
+    = @visits.count
 
-    %table
-      %thead
-        %th Time
-        %th Client
+  %table
+    %thead
+      %th Time
+      %th Name
+      %th Address
+      %th Household Size
 
-      %tbody
+    %tbody
 
-        - @visits.each do |visit|
-          %tr
-            %td= visit.created_at.strftime("%H:%M")
-            %td= visit.client.name
+      - @visits.each do |visit|
+        %tr
+          %td= visit.created_at.strftime("%H:%M")
+          %td= link_to visit.client.name, show_clients_path(uuid: visit.client.uuid)
+          %td= visit.client.address
+          %td= visit.client.household_members.length

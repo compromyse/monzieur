@@ -18,7 +18,7 @@ class VisitsController < ApplicationController
       date = Date.today
     end
 
-    @visits = Visit.includes(:client)
+    @visits = Visit.includes(client: [ :household_members ])
       .where(created_at: date.all_day)
       .order(created_at: :desc)
   end
