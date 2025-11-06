@@ -50,7 +50,6 @@ class ClientsController < ApplicationController
 
   def visit_history
     client = Client.find_by(uuid: params[:uuid])
-
     @visits = client.visit_history
   end
 

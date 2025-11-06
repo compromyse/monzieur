@@ -13,6 +13,7 @@ class Client < ApplicationRecord
 
   def visit_history
     vs = visits
+          .includes(:user)
           .order(created_at: :desc)
 
     Hash[
