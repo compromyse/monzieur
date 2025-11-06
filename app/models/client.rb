@@ -8,7 +8,7 @@ class Client < ApplicationRecord
     v = visits.last
     return '-' if v.nil?
 
-    v.created_at.to_date.to_fs(:long) or '-'
+    v.created_at.to_date.to_fs(:long)
   end
 
   def visit_history
