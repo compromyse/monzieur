@@ -2,6 +2,7 @@ class VisitsController < ApplicationController
 
   def create
     @visit = Visit.new(visit_params)
+    @visit.user_id = Current.user.id
 
     if @visit.save
       redirect_to dashboard_index_path, notice: 'Visit Logged!'

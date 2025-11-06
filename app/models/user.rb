@@ -5,4 +5,6 @@ class User < ApplicationRecord
   normalizes :username, with: ->(e) { e.strip.downcase }
 
   enum :role, %i[ staff admin ]
+
+  has_many :visits
 end

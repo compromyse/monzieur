@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_03_175602) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_06_214319) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -60,11 +60,14 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_03_175602) do
     t.bigint "client_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["client_id"], name: "index_visits_on_client_id"
     t.index ["created_at"], name: "index_visits_on_created_at"
+    t.index ["user_id"], name: "index_visits_on_user_id"
   end
 
   add_foreign_key "household_members", "clients"
   add_foreign_key "sessions", "users"
   add_foreign_key "visits", "clients"
+  add_foreign_key "visits", "users"
 end

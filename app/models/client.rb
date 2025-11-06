@@ -14,11 +14,10 @@ class Client < ApplicationRecord
   def visit_history
     vs = visits
           .order(created_at: :desc)
-          .pluck(:created_at)
 
     Hash[
-      vs.group_by(&:year).map{|y, items|
-        [y, items.group_by { |d| d.strftime('%B') } ]
+      vs.group_by { |visit| visit.created_at.year }.map{ |y, items|
+        [y, items.group_by { |v| v.created_at.strftime('%B') } ]
       }
     ]
   end

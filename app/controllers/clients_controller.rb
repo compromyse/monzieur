@@ -17,7 +17,7 @@ class ClientsController < ApplicationController
 
   def show
     @client = Client
-                .includes(:household_members, :visits)
+                .includes(:household_members)
                 .find_by(uuid: params[:uuid])
 
     if @client.nil?

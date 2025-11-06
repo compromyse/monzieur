@@ -31,15 +31,7 @@
     height: 60px;
     border: 1px solid #000;
     margin-top: 5px;
-  }
-  .visit-table {
-    width: 100%;
-    margin-top: 10px;
-  }
-  .visit-table td {
-    border: none;
-    padding: 3px;
-    width: 50%;
+    resize: none;
   }
   footer {
     text-align: left;
@@ -89,10 +81,10 @@
 <div class="form-section">
   <p><strong>If you are authorizing someone else to pick up on your behalf, please print name below or attach proper documentation.</strong></p>
   <label>Additional Notes &amp; Comments:</label>
-  <textarea class="notes"></textarea>
+  <textarea class="notes" disabled><%= @client.notes %></textarea>
 </div>
 
-<table class="visit-table">
+<table>
   <tr>
     <td>Date of Visit _______ Staff Initials _______</td>
     <td>Date of Visit _______ Staff Initials _______</td>

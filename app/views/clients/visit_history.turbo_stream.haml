@@ -1,10 +1,11 @@
 = turbo_stream.replace 'show_history' do
   %article
-    - @visits.each do |year, months|
+    - @visits.each do |year, items|
       %b= year
 
-      - months.each do |month, dates|
+      - items.each do |month, visits|
         %p
-          = "#{month} (#{dates.count}):"
-          - dates.each do |date|
-            = date.day.ordinalize
+          = "#{month} (#{visits.count}):"
+          - visits.each do |visit|
+            = "#{visit.created_at.day.ordinalize} (#{visit.user.username})"
+            &nbsp;
