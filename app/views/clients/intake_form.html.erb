@@ -41,6 +41,10 @@
   .underline {
     text-decoration: underline;
   }
+  .grid {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
 </style>
 
 <h2>Intake Form</h2>
@@ -84,29 +88,15 @@
   <textarea class="notes" disabled><%= @client.notes %></textarea>
 </div>
 
-<table>
-  <tr>
-    <td>Date of Visit _______ Staff Initials _______</td>
-    <td>Date of Visit _______ Staff Initials _______</td>
-  </tr>
-  <tr>
-    <td>Date of Visit _______ Staff Initials _______</td>
-    <td>Date of Visit _______ Staff Initials _______</td>
-  </tr>
-  <tr>
-    <td>Date of Visit _______ Staff Initials _______</td>
-    <td>Date of Visit _______ Staff Initials _______</td>
-  </tr>
-  <tr>
-    <td>Date of Visit _______ Staff Initials _______</td>
-    <td>Date of Visit _______ Staff Initials _______</td>
-  </tr>
-  <tr>
-    <td>Date of Visit _______ Staff Initials _______</td>
-    <td>Date of Visit _______ Staff Initials _______</td>
-  </tr>
-  <tr>
-    <td>Date of Visit _______ Staff Initials _______</td>
-    <td>Date of Visit _______ Staff Initials _______</td>
-  </tr>
-</table>
+<div class="grid">
+
+  <% @client.visits.each do |visit| %>
+    <div style="padding: 5px;">
+    <b>Date of Visit</b>
+    <span class="underline"><%= visit.user.created_at.strftime("%Y-%m-%d") %></span>
+    <b>Staff</b>
+    <span class="underline"><%= visit.user.username %></span>
+    </div>
+  <% end %>
+
+</div>
