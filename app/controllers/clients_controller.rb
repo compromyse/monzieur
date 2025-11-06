@@ -21,7 +21,7 @@ class ClientsController < ApplicationController
                 .find_by(uuid: params[:uuid])
 
     if @client.nil?
-      redirect_back fallback_location: dashboard_index_path, alert: 'Client not found!'
+      return redirect_back fallback_location: dashboard_index_path, alert: 'Client not found!'
     end
   end
 
@@ -59,7 +59,7 @@ class ClientsController < ApplicationController
                 .find_by(uuid: params[:uuid])
 
     if @client.nil?
-      redirect_back fallback_location: dashboard_index_path, alert: 'Client not found!'
+      return redirect_back fallback_location: dashboard_index_path, alert: 'Client not found!'
     end
 
     @household_member_counts = @client.household_members.group(:member_type).count
