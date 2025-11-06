@@ -56,7 +56,7 @@ class ClientsController < ApplicationController
 
   def intake_form
     @client = Client
-                .includes(:household_members, :visits)
+                .includes(:household_members, visits: [ :user ])
                 .find_by(uuid: params[:uuid])
 
     if @client.nil?
