@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get 'find', on: :collection
     get 'info', on: :collection
     get 'visit_history', on: :collection
+    get 'intake_form', on: :collection
   end
 
   resources :visits, only: [ :create, :index ]

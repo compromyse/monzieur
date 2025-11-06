@@ -1,0 +1,120 @@
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    font-size: 14px;
+  }
+  h2 {
+    text-align: right;
+    font-size: 14px;
+  }
+  .form-section {
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  th, td {
+    border: 1px solid #000;
+    padding: 6px;
+    text-align: left;
+  }
+  .statement {
+    border: 1px solid #000;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  .notes {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #000;
+    margin-top: 5px;
+  }
+  .visit-table {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .visit-table td {
+    border: none;
+    padding: 3px;
+    width: 50%;
+  }
+  footer {
+    text-align: left;
+    margin-top: 15px;
+    font-size: 12px;
+  }
+  .underline {
+    text-decoration: underline;
+  }
+</style>
+
+<h2>Intake Form</h2>
+
+<p>Name: <%= @client.name %></p>
+<p>Date of Intake: <%= @client.created_at %></p>
+<p>Phone Number: <%= @client.mobile_number %></p>
+
+<div class="form-section">
+  <p>Total individuals in household: <%= @client.household_members.count %></p>
+  <% HouseholdMember::MEMBER_TYPES.each do |key, value| %>
+    <%= value %>
+    &nbsp;
+    <span class="underline" style="min-width: 70px;">&nbsp;<%= @household_member_counts[key.to_s] or 0 %>&nbsp;</span>
+    &nbsp;
+  <% end %>
+</div>
+
+<div class="form-section">
+  <strong>Please list and provide identification for each person in your household</strong><br>
+  <small>(*use additional sheets if necessary)</small>
+  <table>
+    <tr><th>First Name</th><th>Last Name</th></tr>
+    <% for member in @client.household_members %>
+      <tr>
+        <td><%= member.first_name %></td>
+        <td><%= member.last_name %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<div class="statement">
+  <strong>Statement of Service</strong><br><br>
+  You will not be turned away on your first visit because of a lack of identification, lack of referral or inability to prove address. You will not be asked to provide your Social Security number to receive food. If you are currently homeless or in a transitional/temporary housing situation, please let the staff/volunteer assisting you know that you may not be able to provide a current address. To assist all of those in need, this agency <u>may</u> limit the services they provide to a defined area and number of times per month you may return.
+</div>
+
+<div class="form-section">
+  <p><strong>If you are authorizing someone else to pick up on your behalf, please print name below or attach proper documentation.</strong></p>
+  <label>Additional Notes &amp; Comments:</label>
+  <textarea class="notes"></textarea>
+</div>
+
+<table class="visit-table">
+  <tr>
+    <td>Date of Visit _______ Staff Initials _______</td>
+    <td>Date of Visit _______ Staff Initials _______</td>
+  </tr>
+  <tr>
+    <td>Date of Visit _______ Staff Initials _______</td>
+    <td>Date of Visit _______ Staff Initials _______</td>
+  </tr>
+  <tr>
+    <td>Date of Visit _______ Staff Initials _______</td>
+    <td>Date of Visit _______ Staff Initials _______</td>
+  </tr>
+  <tr>
+    <td>Date of Visit _______ Staff Initials _______</td>
+    <td>Date of Visit _______ Staff Initials _______</td>
+  </tr>
+  <tr>
+    <td>Date of Visit _______ Staff Initials _______</td>
+    <td>Date of Visit _______ Staff Initials _______</td>
+  </tr>
+  <tr>
+    <td>Date of Visit _______ Staff Initials _______</td>
+    <td>Date of Visit _______ Staff Initials _______</td>
+  </tr>
+</table>

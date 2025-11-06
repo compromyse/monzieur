@@ -1,4 +1,5 @@
 class ClientsController < ApplicationController
+  layout 'pdf', only: [:intake_form]
 
   def new
     @client = Client.new
@@ -51,6 +52,18 @@ class ClientsController < ApplicationController
     client = Client.find_by(uuid: params[:uuid])
 
     @visits = client.visit_history
+  end
+
+  def intake_form
+    @client = Client
+                .includes(:household_members, :visits)
+                .find_by(uuid: params[:uuid])
+
+    if @client.nil?
+      redirect_back fallback_location: dashboard_index_path, alert: 'Client not found!'
+    end
+
+    @household_member_counts = @client.household_members.group(:member_type).count
   end
 
   private
