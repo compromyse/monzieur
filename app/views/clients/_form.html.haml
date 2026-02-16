@@ -26,7 +26,7 @@
             %button{ data: { action: 'nested-fields#remove' } } Remove
 
   %template{ 'data-nested-fields-target': 'template' }
-    %tr
+    %tr{ data: { new_record: "true" } }
       = simple_fields_for 'client[household_members_attributes][]', HouseholdMember.new, index: '__INDEX__' do |hm_f|
         = render 'form_household_members', hm_f: hm_f
 
