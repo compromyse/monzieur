@@ -7,7 +7,13 @@
 
 %article
   %header
-    %b Visit History
+    %nav
+      %ul
+        %li
+          %b Visit History
+      %ul
+        %li
+          = link_to "Daily Sign-in Sheet", daily_signin_visits_path(date: params[:date])
 
   .no-print
     = form_with url: url_for, method: :get do |f|

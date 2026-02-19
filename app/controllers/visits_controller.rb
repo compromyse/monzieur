@@ -1,4 +1,5 @@
 class VisitsController < ApplicationController
+  layout 'pdf', only: [:daily_signin]
 
   def create
     @visit = Visit.new(visit_params)
@@ -12,6 +13,18 @@ class VisitsController < ApplicationController
   end
 
   def index
+    if params[:date].present?
+      date = Date.strptime(params[:date], "%Y-%m-%d")
+    else
+      date = Date.today
+    end
+
+    @visits = Visit.includes(client: [ :household_members ])
+      .where(created_at: date.all_day)
+      .order(created_at: :desc)
+  end
+
+  def daily_signin
     if params[:date].present?
       date = Date.strptime(params[:date], "%Y-%m-%d")
     else

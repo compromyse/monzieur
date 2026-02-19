@@ -24,6 +24,9 @@ Rails.application.routes.draw do
     get 'intake_form', on: :collection
   end
 
-  resources :visits, only: [ :create, :index ]
+  resources :visits, only: [ :create, :index ] do
+    get 'daily_signin', on: :collection
+  end
+
   resources :users, only: [ :new, :create ]
 end
