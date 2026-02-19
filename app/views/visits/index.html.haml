@@ -13,7 +13,7 @@
           %b Visit History
       %ul
         %li
-          = link_to "Daily Sign-in Sheet", daily_signin_visits_path(date: params[:date])
+          = link_to "Daily Sign-in Sheet", daily_signin_visits_path(date: params[:date]), data: { turbo: false }
 
   .no-print
     = form_with url: url_for, method: :get do |f|

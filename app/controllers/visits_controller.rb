@@ -34,6 +34,8 @@ class VisitsController < ApplicationController
     @visits = Visit.includes(client: [ :household_members ])
       .where(created_at: date.all_day)
       .order(created_at: :desc)
+
+    @totals = @visits.unscope(:order).joins(client: :household_members).group(:member_type).count
   end
 
   private

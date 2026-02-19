@@ -5,8 +5,8 @@
     font-size: 14px;
   }
   h2 {
-    text-align: right;
-    font-size: 14px;
+    text-align: center;
+    font-size: 20px;
   }
   .form-section {
     margin-bottom: 20px;
@@ -49,8 +49,8 @@
 
 <h2>Daily Sign-in Sheet</h2>
 
-<p>Agency Site Name: SB</p>
-<p>Date: <%= Date.current.strftime("%I/%d/%Y") %></p>
+<p><b>Agency Site Name:</b> SB</p>
+<p><b>Date:</b> <%= Date.current.strftime("%I/%d/%Y") %></p>
 
 <div class="form-section">
   <table>
@@ -68,8 +68,8 @@
 
     </tr>
 
-    <!-- TODO: Fix N+1 -->
     <% @visits.each_with_index do |visit, index| %>
+      <% counts = visit.client.household_members.group_by { |m| m.member_type }.map { |k,v| [ k, v.count ] }.to_h %>
 
       <tr>
         <td><%= index + 1 %></td>
@@ -77,15 +77,22 @@
         <td><%= visit.client.address %></td>
         <td><%= visit.client.household_members.count %></td>
         <% HouseholdMember::MEMBER_TYPES.each do |id, str| %>
-          <td><%= visit.client.household_members.group(:member_type).count[id.to_s] or 0 %></td>
+          <td><%= counts[id.to_s] or 0 %></td>
         <% end %>
       </tr>
 
     <% end %>
 
+    <td/>
+    <td/>
+    <td/>
+    <td><b>TOTALS<b></td>
+
+    <% HouseholdMember::MEMBER_TYPES.each do |idx, _| %>
+      <td><%= @totals[HouseholdMember::MEMBER_TYPES.keys.find_index(idx)] or 0 %></td>
+    <% end %>
+
   </table>
 </div>
-
-<!-- TODO: Totals -->
 
 <p>Updated June 2025</p>
