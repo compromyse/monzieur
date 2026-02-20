@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TEFAP Attestation of Eligibility</title>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+    }
+    .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 20px 20px 0px 20px;
+    }
+    .logo {
+        text-align: center;
+        color: #a33a1a;
+        margin-bottom: 20px;
+    }
+    .header {
+        text-align: center;
+        color: #a33a1a;
+        margin-bottom: 20px;
+    }
+    .header h1 {
+        font-size: 22px;
+        margin: 5px 0;
+    }
+    .header h2 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+    }
+    td {
+        border: 1px solid #999;
+        padding: 8px;
+        vertical-align: middle;
+    }
+    .input-box {
+        background: #cfd6e6;
+        height: 30px;
+    }
+    .section-title {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+    .checkbox {
+        width: 16px;
+        height: 16px;
+        border: 1px solid #333;
+        display: inline-block;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+    .signature-box {
+        background: #cfd6e6;
+        height: 40px;
+        border: 1px solid #999;
+    }
+    .date-box {
+        background: #cfd6e6;
+        height: 40px;
+        border: 1px solid #999;
+        width: 250px;
+    }
+    .footer-bar {
+        background: #bfbfbf;
+        text-align: center;
+        padding: 5px;
+        font-weight: bold;
+        border: 1px solid #999;
+        margin: 15px 0;
+    }
+    .small-text {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+    .bottom {
+        text-align: center;
+        font-size: 12px;
+        margin-top: 20px;
+    }
+    .date {
+        text-align: right;
+        font-size: 12px;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="logo">
+  <%= image_tag "logo_ogs.png", width: 300 %>
+</div>
+
+<div class="header">
+    <div><strong>NEW YORK STATE | Office of General Services</strong></div>
+    <h1>The Emergency Food Assistance Program (TEFAP)</h1>
+    <h2>Attestation of Eligibility</h2>
+</div>
+
+<table>
+<tr>
+    <td style="width:20%;"><strong>Recipient Name:</strong></td>
+    <td class="input-box" colspan="3"><%= @client.name %></td>
+</tr>
+<tr>
+    <td><strong>Zip Code:</strong></td>
+    <td class="input-box"></td>
+    <td style="width:25%;"><strong>Total Household Members:</strong></td>
+    <td class="input-box"><%= @client.household_members.count %></td>
+</tr>
+</table>
+
+<div class="small-text">
+
+<p><strong>Step 1:</strong> Check one of the two boxes below to indicate how you are eligible for TEFAP.</p>
+
+<p>
+<span class="checkbox"></span>
+<strong>Categorical:</strong> You are categorically eligible to receive USDA Foods through TEFAP if your household participates in any of the following programs: <strong>SNAP, WIC, TANF, Medicaid, or SSI.</strong>
+</p>
+
+<p style="text-align:center;">- OR -</p>
+
+<p>
+<span class="checkbox"></span>
+<strong>Household Income:</strong> If your gross annual household income is at or below 225% of the federal poverty level for the number of people in your household, you are eligible to receive USDA Foods through TEFAP (see appendix A).
+</p>
+
+<p><strong>Step 2:</strong> Check the box below to attest, then sign and date.</p>
+
+<p>
+<span class="checkbox"></span>
+<strong>By checking here, you attest that the following is true:</strong>
+</p>
+
+<ol>
+<li>The recipient’s name, zip code and household size provided above is correct.</li>
+<li>The recipient resides within New York State (there is no minimum length of residency required).</li>
+<li>The recipient meets the TEFAP eligibility guidelines in step 1.</li>
+<li>This food is for the recipient’s home consumption only, and will not be sold, traded, or bartered.</li>
+<li>The recipient is aware of their civil rights as described in the USDA Nondiscrimination Statement below.</li>
+</ol>
+
+</div>
+
+<table>
+<tr>
+    <td style="width:70%;">
+        <div class="signature-box"></div>
+        <div><strong>Signature (Optional)</strong></div>
+    </td>
+    <td style="width:30%;">
+        <div class="date-box"><%= Date.current %></div>
+        <div><strong>Date (Required)</strong></div>
+    </td>
+</tr>
+</table>
+
+<div class="footer-bar">
+This form should remain on site where food is received.
+</div>
+
+<div class="small-text">
+<p><strong>USDA Nondiscrimination Statement</strong></p>
+
+<p>
+In accordance with federal civil rights law and U.S. Department of Agriculture (USDA) civil rights regulations and policies, this institution is prohibited from discriminating on the basis of race, color, national origin, sex (including gender identity and sexual orientation), disability, age, or reprisal or retaliation for prior civil rights activity.
+</p>
+
+<p>
+Program information may be made available in languages other than English. Persons with disabilities who require alternative means of communication to obtain program information (e.g., Braille, large print, audiotape, American Sign Language), should contact the responsible state or local agency that administers the program or USDA’s TARGET Center at (202) 720-2600 (voice and TTY) or contact USDA through the Federal Relay Service at (800) 877-8339.
+</p>
+
+<p>
+To file a program discrimination complaint, a Complainant should complete a Form AD-3027, USDA Program Discrimination Complaint Form which can be obtained online at: https://www.usda.gov/sites/default/files/documents/USDA-OASCR%20P-Complaint-Form-0508-0002-508-11-28-17Fax2Mail.pdf, from any USDA office, by calling (866) 632-9992, or by writing a letter addressed to USDA. The letter must contain the complainant’s name, address, telephone number, and a written description of the alleged discriminatory action in sufficient detail to inform the Assistant Secretary for Civil Rights (ASCR) about the nature and date of an alleged civil rights violation.
+</p>
+
+<p>
+The completed AD-3027 form or letter must be submitted to USDA by:
+</p>
+
+<ol>
+<li>mail: U.S. Department of Agriculture\Office of the Assistant Secretary for Civil Rights\1400 Independence Avenue, SW Washington, D.C. 20250-9410; or</li>
+<li>fax: (833) 256-1665 or (202) 690-7442; or</li>
+<li>email: program.intake@usda.gov</li>
+</ol>
+
+<p>This institution is an equal opportunity provider.</p>
+
+</div>
+
+<div class="bottom">
+OGS | USDA Food Distribution | (518) 474-5122 | https://ogs.ny.gov/usda-food-distribution
+<br>
+  <div class="date">
+    (01/2025)
+  </div>
+</div>
+
+</div>
+</body>
+</html>

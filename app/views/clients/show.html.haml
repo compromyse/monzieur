@@ -6,6 +6,8 @@
           %b Client Information
       %ul
         %li
+          = link_to "TEFAP Attestation Form", tefap_attestation_clients_path(uuid: @client.uuid), target: "_blank"
+          |
           = link_to "Intake Form", intake_form_clients_path(uuid: @client.uuid), target: "_blank"
           |
           = link_to "Edit", edit_client_path(id: @client.id)
