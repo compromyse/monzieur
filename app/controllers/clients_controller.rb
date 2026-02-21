@@ -84,6 +84,7 @@ class ClientsController < ApplicationController
       :mobile_number,
       :address,
       :notes,
+      :zipcode,
       household_members_attributes: [
         :first_name,
         :last_name,
