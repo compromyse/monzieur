@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get 'visit_history', on: :collection
     get 'intake_form', on: :collection
     get 'tefap_attestation', on: :collection
+    get 'qr', on: :collection
   end
 
   resources :visits, only: [ :create, :index ] do

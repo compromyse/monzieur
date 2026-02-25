@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   layout 'pdf', only: [:intake_form, :tefap_attestation]
+  layout 'qr', only: [:qr]
 
   def new
     @client = Client.new
@@ -73,6 +74,16 @@ class ClientsController < ApplicationController
     if @client.nil?
       return redirect_back fallback_location: dashboard_index_path, alert: 'Client not found!'
     end
+  end
+
+  def qr
+    @client = Client.find(params[:id])
+    @code = RQRCode::QRCode.new(@client.uuid)
+    @png = @code.as_png(
+      bit_depth: 1,
+      color_mode: ChunkyPNG::COLOR_GRAYSCALE,
+      size: 140
+    )
   end
 
   private

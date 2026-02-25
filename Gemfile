@@ -50,3 +50,5 @@ end
 gem "haml-rails"
 
 gem "simple_form"
+
+gem "rqrcode"

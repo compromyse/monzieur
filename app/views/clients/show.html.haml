@@ -6,6 +6,8 @@
           %b Client Information
       %ul
         %li
+          = link_to "QR Code", qr_clients_path(id: @client.id), target: "_blank"
+          |
           = link_to "TEFAP Attestation", tefap_attestation_clients_path(uuid: @client.uuid), target: "_blank"
           |
           = link_to "Intake", intake_form_clients_path(uuid: @client.uuid), target: "_blank"

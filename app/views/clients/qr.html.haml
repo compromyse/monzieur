@@ -1,0 +1,48 @@
+.container
+  .label
+    %h1 SENECA BABCOCK FOOD PANTRY
+    %h2= @client.name
+    .qr
+      %img{ src: "data:image/png;base64,#{Base64.strict_encode64(@png.to_s)}", alt: "QR Code" }
+
+:css
+  @page {
+    margin: 0;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .label {
+    width: 3in;
+    padding: 10px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+  }
+
+  h1 {
+    font-size: 14pt;
+    margin: 0 0 12px 0;
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: 11pt;
+    margin-bottom: 0px;
+    font-weight: bold;
+  }
+
+  .qr img {
+    width: 2in;
+    height: auto;
+    image-rendering: pixelated;
+  }
