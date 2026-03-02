@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  layout 'pdf', only: [:intake_form, :tefap_attestation]
+  layout 'pdf', only: [:intake_form, :tefap_attestation, :agreement]
 
   def new
     @client = Client.new
@@ -66,6 +66,16 @@ class ClientsController < ApplicationController
   end
 
   def tefap_attestation
+    @client = Client
+                .includes(:household_members, visits: [ :user ])
+                .find_by(uuid: params[:uuid])
+
+    if @client.nil?
+      return redirect_back fallback_location: dashboard_index_path, alert: 'Client not found!'
+    end
+  end
+
+  def agreement
     @client = Client
                 .includes(:household_members, visits: [ :user ])
                 .find_by(uuid: params[:uuid])

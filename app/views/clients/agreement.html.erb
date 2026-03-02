@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pantry Agreement</title>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 40px;
+    }
+    .logo {
+        text-align: center;
+        color: #a33a1a;
+        margin-bottom: 40px;
+    }
+    .container {
+        max-width: 800px;
+        margin: auto;
+        line-height: 1.6;
+        font-size: 16px;
+    }
+    .section {
+        margin-top: 30px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="logo">
+  <%= image_tag "logo_sba.jpg", width: 400 %>
+</div>
+
+<p>Dear Community Members,</p>
+
+<p>
+Due to the large number of community memnbers needing access to food, we 
+ask that you use pantries within yor zip code. However, we understand there are 
+many reasons why this might not be possible. Because of this, we just ask that you 
+find a pantry that is most convenient for you and stick to that location. This helps 
+to make sure all those who need food are able to get it.
+</p>
+
+<p>
+The following is an agreement stating that you are choosing <u>1168 Seneca St. 
+  Buffalo NY 14210</u> as your main pantry location. This does not apply to emergency 
+situations.
+</p>
+
+<p>
+Seneca-Bacock<br>
+Commuity Association
+</p>
+
+<p class="section">
+I, <b><%= @client.name %></b> Confirm that this is the only 
+pantry I am using on a regular basis. Even though I live outside the 14210 zip 
+code, this pantry is most convenient and accessible for my household.
+</p>
+
+<div class="section">
+  Community Member Signature <b><%= @client.name %></b>
+</div>
+
+<div class="section">
+  Date of agreement <b><%= Date.current %></b>
+</div>
+
+<div class="section">
+  Co-signed by <b><%= Current.user.username %></b>
+</div>
+
+</div>
+</body>
+</html>
