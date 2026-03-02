@@ -1,6 +1,5 @@
 class ClientsController < ApplicationController
   layout 'pdf', only: [:intake_form, :tefap_attestation]
-  layout 'qr', only: [:qr]
 
   def new
     @client = Client.new
@@ -84,6 +83,8 @@ class ClientsController < ApplicationController
       color_mode: ChunkyPNG::COLOR_GRAYSCALE,
       size: 140
     )
+
+    render layout: 'qr'
   end
 
   private
