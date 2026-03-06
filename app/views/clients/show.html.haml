@@ -37,25 +37,32 @@
     = @client.last_visit
 
   %h3 Household Members
-  
-  %p
-    Total:
-    = @client.household_members.count + 1
 
-    (incl. client)
+  %table
+    - HouseholdMember::MEMBER_TYPES.values.each do |t|
+      %th= t
+
+    %tr
+      - HouseholdMember::MEMBER_TYPES.keys.each do |t|
+        %td= @client.member_counts[t.to_s]
+    %tr
+      %td{ colspan: HouseholdMember::MEMBER_TYPES.keys.count, style: 'text-align: right;' }
+        Total:
+        = @client.member_counts.values.sum + 1
+
+        (incl. client)
+
 
   %table
     %thead
       %th First Name
       %th Last Name
-      %th Member Type
 
     %tbody
       - @client.household_members.each do |member|
         %tr
           %td= member.first_name
           %td= member.last_name
-          %td= HouseholdMember::MEMBER_TYPES[member.member_type.to_sym]
 
   %p
     %b Notes:

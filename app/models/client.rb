@@ -10,8 +10,6 @@ class Client < ApplicationRecord
     end
   end
 
-
-
   def last_visit
     v = visits.last
     return '-' if v.nil?
