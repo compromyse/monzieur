@@ -7,12 +7,15 @@
 = f.input :address
 = f.input :zipcode
 
+.grid
+  - HouseholdMember::MEMBER_TYPES.keys.each do |t|
+    = f.input t
+
 %h3 Household Members
 %table
   %thead
     %th First Name
     %th Last Name
-    %th Member Type
     %th Actions
 
   %tbody{ 'data-nested-fields-target': 'fields' }
@@ -34,6 +37,7 @@
         %td
           %button{ data: { action: 'nested-fields#remove' } } Remove
 
+-# TODO: when the totals change, just add as many fields as needed for household members
 = button_tag "Add Member", type: :button, data: { action: "nested-fields#append" }
 
 = f.input :notes, as: :text

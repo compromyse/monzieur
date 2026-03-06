@@ -107,6 +107,7 @@ class ClientsController < ApplicationController
       :address,
       :notes,
       :zipcode,
+      *HouseholdMember::MEMBER_TYPES.keys,
       household_members_attributes: [
         :first_name,
         :last_name,
