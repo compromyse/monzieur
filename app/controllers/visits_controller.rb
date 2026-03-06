@@ -35,7 +35,10 @@ class VisitsController < ApplicationController
       .where(created_at: date.all_day)
       .order(created_at: :desc)
 
-    @totals = @visits.unscope(:order).joins(client: :household_members).group(:member_type).count
+    @totals = Client
+                  .where(id: @visits.unscope(:order).select(:client_id))
+                  .pluck(:member_counts)
+                  .reduce(Hash.new(0)) { |acc, h| acc.merge(h) { |_, a, b| a + b } }
   end
 
   private

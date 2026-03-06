@@ -52,3 +52,5 @@ gem "haml-rails"
 gem "simple_form"
 
 gem "rqrcode"
+
+gem "activerecord-typedstore", "~> 1.6"

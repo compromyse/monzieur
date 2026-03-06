@@ -4,6 +4,14 @@ class Client < ApplicationRecord
 
   accepts_nested_attributes_for :household_members, allow_destroy: true, reject_if: :all_blank
 
+  typed_store :member_counts, coder: ActiveRecord::TypedStore::IdentityCoder do |s|
+    HouseholdMember::MEMBER_TYPES.keys.each do |t|
+      s.integer t, default: 0, null: false
+    end
+  end
+
+
+
   def last_visit
     v = visits.last
     return '-' if v.nil?

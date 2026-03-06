@@ -62,7 +62,7 @@ class ClientsController < ApplicationController
       return redirect_back fallback_location: dashboard_index_path, alert: 'Client not found!'
     end
 
-    @household_member_counts = @client.household_members.group(:member_type).count
+    @household_member_counts = @client.member_counts
   end
 
   def tefap_attestation
@@ -110,7 +110,6 @@ class ClientsController < ApplicationController
       household_members_attributes: [
         :first_name,
         :last_name,
-        :member_type,
         :id,
         :_destroy,
       ],

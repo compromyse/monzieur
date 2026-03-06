@@ -69,13 +69,13 @@
     </tr>
 
     <% @visits.each_with_index do |visit, index| %>
-      <% counts = visit.client.household_members.group_by { |m| m.member_type }.map { |k,v| [ k, v.count ] }.to_h %>
+      <% counts = visit.client.member_counts %>
 
       <tr>
         <td><%= index + 1 %></td>
         <td><%= visit.client.name %></td>
         <td><%= visit.client.address %></td>
-        <td><%= visit.client.household_members.count %></td>
+        <td><%= counts.values.sum %></td>
         <% HouseholdMember::MEMBER_TYPES.each do |id, str| %>
           <td><%= counts[id.to_s] or 0 %></td>
         <% end %>
@@ -89,7 +89,7 @@
     <td><b>TOTALS<b></td>
 
     <% HouseholdMember::MEMBER_TYPES.each do |idx, _| %>
-      <td><%= @totals[HouseholdMember::MEMBER_TYPES.keys.find_index(idx)] or 0 %></td>
+      <td><%= @totals[idx.to_s] %></td>
     <% end %>
 
   </table>
