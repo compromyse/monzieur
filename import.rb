@@ -73,4 +73,4 @@ end
 
 final = final.map { |c| change(c) }
 
-Client.import final
+Client.import(final, recursive: true)
