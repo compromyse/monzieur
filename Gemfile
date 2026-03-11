@@ -54,3 +54,7 @@ gem "simple_form"
 gem "rqrcode"
 
 gem "activerecord-typedstore", "~> 1.6"
+
+gem "csv", "~> 3.3"
+
+gem "activerecord-import", "~> 2.2"
