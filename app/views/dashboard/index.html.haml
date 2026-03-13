@@ -45,6 +45,15 @@
             window.location.href = "#{show_clients_path}?uuid=" + uuid;
           },
 
+          render:{
+            item: function(data, escape) {
+              return `<div>${data.first_name} ${data.last_name} (${data.mobile_number})</div>`
+            },
+            option: function(data, escape) {
+              return `<div>${data.first_name} ${data.last_name} (${data.mobile_number})</div>`
+            },
+          }
+
       });
 
   document.addEventListener('DOMContentLoaded', function() {
