@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_11_025533) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_18_223140) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -27,7 +27,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_11_025533) do
     t.string "zipcode"
     t.index ["first_name"], name: "index_clients_on_first_name"
     t.index ["last_name"], name: "index_clients_on_last_name"
-    t.index ["mobile_number"], name: "index_clients_on_mobile_number", unique: true
+    t.index ["mobile_number"], name: "index_clients_on_mobile_number"
     t.index ["uuid"], name: "index_clients_on_uuid", unique: true
   end
 
