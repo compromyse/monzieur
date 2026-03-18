@@ -1,0 +1,15 @@
+%article
+  %header
+    %b Import Clients from CSV
+
+  = form_with url: import_csv_imports_path do |f|
+    .grid
+      %div
+        = f.label "Full List"
+        = f.file_field :full_list, required: true
+
+      %div
+        = f.label "Client Only"
+        = f.file_field :clients, required: true
+
+    = f.submit "Import Clients"

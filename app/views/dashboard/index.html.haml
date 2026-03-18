@@ -21,6 +21,7 @@
 
     .grid
       = button_to "Create New User", new_user_path, method: :get
+      = button_to "Import Data", import_csv_form_imports_path, method: :get
 
 :javascript
   new TomSelect('#search',{

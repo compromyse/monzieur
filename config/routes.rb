@@ -32,4 +32,9 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [ :new, :create ]
+
+  resources :imports, only: [] do
+    get 'import_csv_form', on: :collection
+    post 'import_csv', on: :collection
+  end
 end
