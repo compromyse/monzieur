@@ -16,6 +16,10 @@
           |
           = link_to "Edit", edit_client_path(id: @client.id)
 
+  - if @client.member_counts.values.sum != @client.household_members.count
+    %article{ style: 'background-color: #060e14;' }
+      = tag.div("Warning: THE CALCULATED HOUSEHOLD MEMBER COUNT DOESN'T EQUAL TO THE SUM OF THE HOUSEHOLD MEMBER COUNTS ENTERED", style: "color: #ffaaaa; text-align: center;")
+
   %p
     First Name:
     = @client.first_name
