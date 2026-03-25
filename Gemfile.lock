@@ -88,6 +88,8 @@ GEM
       msgpack (~> 1.2)
     brakeman (7.1.0)
       racc
+    bugsnag (6.29.0)
+      concurrent-ruby (~> 1.0)
     builder (3.3.0)
     bundler-audit (0.9.2)
       bundler (>= 1.2.0, < 3)
@@ -340,6 +342,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap
   brakeman
+  bugsnag (~> 6.29)
   bundler-audit
   csv (~> 3.3)
   debug
