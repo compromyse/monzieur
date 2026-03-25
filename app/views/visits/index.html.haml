@@ -18,12 +18,12 @@
   .no-print
     = form_with url: url_for, method: :get do |f|
       .grid
-        = f.date_field :date, value: (params[:date] or Date.today.strftime("%Y-%m-%d"))
+        = f.date_field :date, value: (params[:date] or Time.current.strftime("%Y-%m-%d"))
         = f.submit 'Select'
 
   %h5
     Date:
-    = params[:date] or Date.today.strftime("%Y-%m-%d")
+    = params[:date] or Time.current.strftime("%Y-%m-%d")
   %h5
     Total Visits:
     = @visits.count

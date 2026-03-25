@@ -16,7 +16,7 @@ class VisitsController < ApplicationController
     if params[:date].present?
       date = Date.strptime(params[:date], "%Y-%m-%d")
     else
-      date = Date.today
+      date = Time.current.to_date
     end
 
     @visits = Visit.includes(client: [ :household_members ])
@@ -28,7 +28,7 @@ class VisitsController < ApplicationController
     if params[:date].present?
       date = Date.strptime(params[:date], "%Y-%m-%d")
     else
-      date = Date.today
+      date = Time.current.to_date
     end
 
     @visits = Visit.includes(client: [ :household_members ])
