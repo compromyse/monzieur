@@ -48,7 +48,7 @@
     %tr
       %td{ colspan: HouseholdMember::MEMBER_TYPES.keys.count, style: 'text-align: right;' }
         Total:
-        = @client.member_counts.values.sum + 1
+        = @client.member_counts.values.sum
 
         (incl. client)
 
