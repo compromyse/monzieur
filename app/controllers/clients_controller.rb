@@ -9,7 +9,7 @@ class ClientsController < ApplicationController
     @client = Client.new(client_params)
 
     if @client.save
-      redirect_to dashboard_index_path, notice: 'Client Created!'
+      redirect_to root_path, notice: 'Client Created!'
     else
       render :new, status: :unprocessable_entity
     end
@@ -21,7 +21,7 @@ class ClientsController < ApplicationController
                 .find_by(uuid: params[:uuid])
 
     if @client.nil?
-      return redirect_back fallback_location: dashboard_index_path, alert: 'Client not found!'
+      return redirect_back fallback_location: root_path, alert: 'Client not found!'
     end
   end
 
@@ -59,7 +59,7 @@ class ClientsController < ApplicationController
                 .find_by(uuid: params[:uuid])
 
     if @client.nil?
-      return redirect_back fallback_location: dashboard_index_path, alert: 'Client not found!'
+      return redirect_back fallback_location: root_path, alert: 'Client not found!'
     end
 
     @household_member_counts = @client.member_counts
@@ -71,7 +71,7 @@ class ClientsController < ApplicationController
                 .find_by(uuid: params[:uuid])
 
     if @client.nil?
-      return redirect_back fallback_location: dashboard_index_path, alert: 'Client not found!'
+      return redirect_back fallback_location: root_path, alert: 'Client not found!'
     end
   end
 
@@ -81,7 +81,7 @@ class ClientsController < ApplicationController
                 .find_by(uuid: params[:uuid])
 
     if @client.nil?
-      return redirect_back fallback_location: dashboard_index_path, alert: 'Client not found!'
+      return redirect_back fallback_location: root_path, alert: 'Client not found!'
     end
   end
 
