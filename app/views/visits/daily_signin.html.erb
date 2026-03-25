@@ -83,10 +83,7 @@
 
     <% end %>
 
-    <td/>
-    <td/>
-    <td/>
-    <td><b>TOTALS<b></td>
+    <td colspan=4><b>TOTALS<b></td>
 
     <% HouseholdMember::MEMBER_TYPES.each do |idx, _| %>
       <td><%= @totals[idx.to_s] %></td>
