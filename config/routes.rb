@@ -11,28 +11,36 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "dashboard#index"
+  root "pantry#index"
 
-  resources :clients, only: [ :new, :edit, :update ] do
-    post 'create', on: :collection
-    get 'show', on: :collection, as: 'show'
-    get 'find', on: :collection
-    get 'info', on: :collection
-    get 'visit_history', on: :collection
-    get 'intake_form', on: :collection
-    get 'tefap_attestation', on: :collection
-    get 'agreement', on: :collection
-    get 'qr', on: :collection
-  end
+  resources :pantry, only: [ :new, :create ]
 
-  resources :visits, only: [ :create, :index ] do
-    get 'daily_signin', on: :collection
-  end
+  scope ":pantry_id" do
+    resources :dashboard, only: [] do
+      get 'index', on: :collection
+    end
 
-  resources :users, only: [ :new, :create ]
+    resources :clients, only: [ :new, :edit, :update ] do
+      post 'create', on: :collection
+      get 'show', on: :collection, as: 'show'
+      get 'find', on: :collection
+      get 'info', on: :collection
+      get 'visit_history', on: :collection
+      get 'intake_form', on: :collection
+      get 'tefap_attestation', on: :collection
+      get 'agreement', on: :collection
+      get 'qr', on: :collection
+    end
 
-  resources :imports, only: [] do
-    get 'import_csv_form', on: :collection
-    post 'import_csv', on: :collection
+    resources :visits, only: [ :create, :index ] do
+      get 'daily_signin', on: :collection
+    end
+
+    resources :users, only: [ :new, :create ]
+
+    resources :imports, only: [] do
+      get 'import_csv_form', on: :collection
+      post 'import_csv', on: :collection
+    end
   end
 end

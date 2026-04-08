@@ -1,0 +1,8 @@
+%article
+  %header
+    %b Create a New Pantry
+
+  = simple_form_for @pantry, url: pantry_index_path do |f|
+    = render 'form', f: f
+
+    = f.submit

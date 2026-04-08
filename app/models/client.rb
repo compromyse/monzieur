@@ -1,6 +1,10 @@
 class Client < ApplicationRecord
+  belongs_to :pantry
+
   has_many :visits
   has_many :household_members
+
+  before_validation :assign_pantry, on: :create
 
   accepts_nested_attributes_for :household_members, allow_destroy: true, reject_if: :all_blank
 
@@ -31,5 +35,11 @@ class Client < ApplicationRecord
 
   def name
     [first_name, last_name].join(' ')
+  end
+
+  private
+
+  def assign_pantry
+    self.pantry = Current.pantry
   end
 end

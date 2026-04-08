@@ -1,0 +1,8 @@
+%article
+  %header
+    %b Select a Pantry to Manage
+
+  - @pantries.each do |p|
+    = button_to p.name, dashboard_index_path(pantry_id: p.id), method: :get
+
+  = link_to "Create a New Pantry", new_pantry_path

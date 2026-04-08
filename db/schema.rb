@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_08_180704) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_08_183258) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,12 +22,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_08_180704) do
     t.jsonb "member_counts", default: {}, null: false
     t.string "mobile_number"
     t.string "notes", default: "", null: false
+    t.bigint "pantry_id", null: false
     t.datetime "updated_at", null: false
     t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.string "zipcode"
     t.index ["first_name"], name: "index_clients_on_first_name"
     t.index ["last_name"], name: "index_clients_on_last_name"
     t.index ["mobile_number"], name: "index_clients_on_mobile_number"
+    t.index ["pantry_id"], name: "index_clients_on_pantry_id"
     t.index ["uuid"], name: "index_clients_on_uuid", unique: true
   end
 
@@ -77,17 +79,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_08_180704) do
     t.datetime "created_at", null: false
     t.bigint "pantry_id", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.index ["client_id"], name: "index_visits_on_client_id"
     t.index ["created_at"], name: "index_visits_on_created_at"
     t.index ["pantry_id"], name: "index_visits_on_pantry_id"
-    t.index ["user_id"], name: "index_visits_on_user_id"
   end
 
+  add_foreign_key "clients", "pantries"
   add_foreign_key "household_members", "clients"
   add_foreign_key "household_members", "pantries"
   add_foreign_key "sessions", "users"
   add_foreign_key "visits", "clients"
   add_foreign_key "visits", "pantries"
-  add_foreign_key "visits", "users"
 end
