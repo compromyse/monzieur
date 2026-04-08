@@ -1,5 +1,6 @@
 class HouseholdMember < ApplicationRecord
   belongs_to :client
+  belongs_to :pantry
 
   MEMBER_TYPES = {
     infant: 'Infant (< 2)',
