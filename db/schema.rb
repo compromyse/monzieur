@@ -77,9 +77,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_08_180704) do
     t.datetime "created_at", null: false
     t.bigint "pantry_id", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["client_id"], name: "index_visits_on_client_id"
     t.index ["created_at"], name: "index_visits_on_created_at"
     t.index ["pantry_id"], name: "index_visits_on_pantry_id"
+    t.index ["user_id"], name: "index_visits_on_user_id"
   end
 
   add_foreign_key "household_members", "clients"
@@ -87,4 +89,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_08_180704) do
   add_foreign_key "sessions", "users"
   add_foreign_key "visits", "clients"
   add_foreign_key "visits", "pantries"
+  add_foreign_key "visits", "users"
 end
