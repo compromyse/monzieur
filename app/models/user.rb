@@ -9,11 +9,11 @@ class User < ApplicationRecord
 
   normalizes :username, with: ->(e) { e.strip.downcase }
 
-  def admin?
-    Current.pantries_user.role == "admin"
+  def owner?
+    Current.pantries_user.role == "owner"
   end
 
-  def staff?
-    Current.pantries_user.role == "staff"
+  def admin?
+    Current.pantries_user.role == "admin" or owner?
   end
 end

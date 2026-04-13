@@ -2,5 +2,5 @@ class PantriesUser < ApplicationRecord
   belongs_to :user
   belongs_to :pantry
 
-  enum :role, %i[ staff admin ]
+  enum :role, %i[ staff admin owner ]
 end
