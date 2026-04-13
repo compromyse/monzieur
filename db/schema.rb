@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_13_175845) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_13_181516) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -53,7 +53,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_13_175845) do
   create_table "pantries_users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "pantry_id", null: false
-    t.string "role", default: "employee", null: false
+    t.integer "role", default: 0, null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["pantry_id"], name: "index_pantries_users_on_pantry_id"
@@ -73,7 +73,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_13_175845) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "password_digest", null: false
-    t.integer "role", default: 0, null: false
     t.datetime "updated_at", null: false
     t.string "username", null: false
   end

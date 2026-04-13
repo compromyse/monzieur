@@ -9,5 +9,11 @@ class User < ApplicationRecord
 
   normalizes :username, with: ->(e) { e.strip.downcase }
 
-  enum :role, %i[ staff admin ]
+  def admin?
+    Current.pantries_user.role == "admin"
+  end
+
+  def staff?
+    Current.pantries_user.role == "staff"
+  end
 end
