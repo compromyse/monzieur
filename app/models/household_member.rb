@@ -12,6 +12,8 @@ class HouseholdMember < ApplicationRecord
     senior: 'Senior (60+)',
   }
 
+  default_scope { where(pantry_id: Current.pantry&.id).distinct }
+
   private
 
   def assign_pantry

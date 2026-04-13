@@ -6,6 +6,8 @@ class Client < ApplicationRecord
 
   before_validation :assign_pantry, on: :create
 
+  default_scope { where(pantry_id: Current.pantry&.id).distinct }
+
   accepts_nested_attributes_for :household_members, allow_destroy: true, reject_if: :all_blank
 
   typed_store :member_counts, coder: ActiveRecord::TypedStore::IdentityCoder do |s|
