@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
 
-  before_action :set_pantry
+  before_action :set_pantry, :set_pantries_user
 
   private
   
@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
 
   def set_pantry
     Current.pantry ||= Pantry.find_by(id: params[:pantry_id])
+  end
+
+  def set_pantries_user
+    Current.pantries_user ||= PantriesUser.find_by(user_id: Current.user.id, pantry_id: Current.pantry&.id)
   end
 
   def default_url_options

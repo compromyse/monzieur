@@ -1,9 +1,10 @@
 class Pantry < ApplicationRecord
-  has_and_belongs_to_many :user
-
   has_many :household_members
   has_many :visits
   has_many :clients
 
-  default_scope { joins(:user).where(users: { id: Current.user&.id }).distinct }
+  has_many :pantries_user
+  has_many :users, through: :pantries_user
+
+  default_scope { joins(:pantries_user).where(pantries_user: { user_id: Current.user&.id }).distinct }
 end

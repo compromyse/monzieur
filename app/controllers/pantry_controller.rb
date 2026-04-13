@@ -11,8 +11,8 @@ class PantryController < ApplicationController
   def create
     @pantry = Pantry.new(pantry_params)
 
-    if @pantry.save
-      redirect_to dashboard_index_path, notice: 'Pantry Created!'
+    if @pantry.save and Current.user.pantries << @pantry
+      redirect_to dashboard_index_path(pantry_id: @pantry.id), notice: 'Pantry Created!'
     else
       render :new, status: :unprocessable_entity
     end

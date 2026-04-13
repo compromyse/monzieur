@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_08_184833) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_13_175845) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -50,10 +50,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_08_184833) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pantries_users", id: false, force: :cascade do |t|
-    t.bigint "pantry_id"
-    t.bigint "user_id"
+  create_table "pantries_users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "pantry_id", null: false
+    t.string "role", default: "employee", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["pantry_id"], name: "index_pantries_users_on_pantry_id"
+    t.index ["user_id", "pantry_id"], name: "index_pantries_users_on_user_id_and_pantry_id", unique: true
     t.index ["user_id"], name: "index_pantries_users_on_user_id"
   end
 
@@ -88,6 +92,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_08_184833) do
   add_foreign_key "clients", "pantries"
   add_foreign_key "household_members", "clients"
   add_foreign_key "household_members", "pantries"
+  add_foreign_key "pantries_users", "pantries"
+  add_foreign_key "pantries_users", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "visits", "clients"
   add_foreign_key "visits", "pantries"

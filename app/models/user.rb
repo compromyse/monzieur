@@ -4,7 +4,8 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :visits
 
-  has_and_belongs_to_many :pantries
+  has_many :pantries_user
+  has_many :pantries, through: :pantries_user
 
   normalizes :username, with: ->(e) { e.strip.downcase }
 
