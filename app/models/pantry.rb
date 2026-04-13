@@ -5,5 +5,5 @@ class Pantry < ApplicationRecord
   has_many :visits
   has_many :clients
 
-  default_scope { joins(:user).where(users: { id: Current.user.id }).distinct }
+  default_scope { joins(:user).where(users: { id: Current.user&.id }).distinct }
 end
