@@ -13,7 +13,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pantry#index"
 
-  resources :pantry, only: [ :new, :create ]
+  resources :pantry, only: [ :new, :create ] do
+    get 'users'
+    post 'add_user'
+  end
 
   scope ":pantry_id" do
     resources :dashboard, only: [] do

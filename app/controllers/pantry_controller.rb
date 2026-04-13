@@ -18,6 +18,10 @@ class PantryController < ApplicationController
     end
   end
 
+  def users
+    @users = Current.pantry.users
+  end
+
   private
 
   def pantry_params
