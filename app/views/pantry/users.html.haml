@@ -2,5 +2,27 @@
   %header
     %b Manage Users
 
-  - @users.each do |u|
-    = u.username
+  %table
+    %tr
+      %th Username
+      %th Actions
+
+    - @users.each do |u|
+      %tr
+        %td= u.username
+        %td
+          - if u.username == Current.user.username
+            Remove
+          - else
+            = link_to "Remove", pantry_remove_user_path(username: u.username)
+
+  %br
+  %br
+
+  %article
+    %header
+      Add User
+
+    = form_with url: pantry_add_user_path, method: :post do |f|
+      = f.text_field :username, required: true
+      = f.submit "Add"

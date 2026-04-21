@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_pantries_user
-    Current.pantries_user ||= PantriesUser.find_by(user_id: Current.user.id, pantry_id: Current.pantry&.id)
+    Current.pantries_user ||= PantriesUser.find_by(user_id: Current.user&.id, pantry_id: Current.pantry&.id)
   end
 
   def default_url_options
