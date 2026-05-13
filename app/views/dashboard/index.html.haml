@@ -20,6 +20,7 @@
       %b Admin Operations (only visible to admins)
 
     .grid
+      = button_to "Edit Pantry", edit_pantry_path(Current.pantry.id), method: :get
       = button_to "Manage Users", pantry_users_path, method: :get
       = button_to "Import Data", import_csv_form_imports_path, method: :get
 

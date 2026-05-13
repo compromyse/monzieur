@@ -18,6 +18,20 @@ class PantryController < ApplicationController
     end
   end
 
+  def edit
+    @pantry = Pantry.find(params[:id])
+  end
+
+  def update
+    @pantry = Pantry.find(params[:id])
+
+    if @pantry.update(pantry_params)
+      redirect_to dashboard_index_path(pantry_id: @pantry.id), notice: 'Pantry Updated!'
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def users
     @users = Current.pantry.users
   end
@@ -49,6 +63,7 @@ class PantryController < ApplicationController
   def pantry_params
     params.require(:pantry).permit(
       :name,
+      :address,
     )
   end
 end

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resource :session
   resource :user
 
-  resources :pantry, only: [ :new, :create ] do
+  resources :pantry, only: [ :new, :create, :edit, :update ] do
     get 'users'
     post 'add_user'
     get 'remove_user'

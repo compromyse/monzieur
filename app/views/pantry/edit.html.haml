@@ -1,0 +1,8 @@
+%article
+  %header
+    %b Edit Pantry Information
+
+  = simple_form_for @pantry, url: pantry_path, method: :patch do |f|
+    = render 'form', f: f
+
+    = f.submit
