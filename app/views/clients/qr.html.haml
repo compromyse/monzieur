@@ -1,6 +1,6 @@
 .container
   .label
-    %h1 SENECA BABCOCK FOOD PANTRY
+    %h1 SENECA STREET FOOD PANTRY
     %h2= @client.name
     .qr
       %img{ src: "data:image/png;base64,#{Base64.strict_encode64(@png.to_s)}", alt: "QR Code" }
