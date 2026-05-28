@@ -49,4 +49,8 @@ Rails.application.routes.draw do
       post 'import_csv', on: :collection
     end
   end
+
+  namespace :admin do
+    get 'index', to: 'dashboard#index'
+  end
 end
