@@ -49,16 +49,18 @@
 
 <h2>Intake Form</h2>
 
-<p>Name: <%= @client.name %></p>
-<p>Date of Intake: <%= @client.created_at %></p>
-<p>Phone Number: <%= @client.mobile_number %></p>
+<p>Name: <%= client.name %></p>
+<p>Date of Intake: <%= client.created_at %></p>
+<p>Phone Number: <%= client.mobile_number %></p>
 
 <div class="form-section">
-  <p>Total individuals in household: <%= @household_member_counts.values.sum %></p>
+  <% household_member_counts = client.member_counts %>
+
+  <p>Total individuals in household: <%= household_member_counts.values.sum %></p>
   <% HouseholdMember::MEMBER_TYPES.each do |key, value| %>
     <%= value %>
     &nbsp;
-    <span class="underline" style="min-width: 70px;">&nbsp;<%= @household_member_counts[key.to_s] or 0 %>&nbsp;</span>
+    <span class="underline" style="min-width: 70px;">&nbsp;<%= household_member_counts[key.to_s] or 0 %>&nbsp;</span>
     &nbsp;
   <% end %>
 </div>
@@ -67,7 +69,7 @@
   <strong>Please list and provide identification for each person in your household</strong><br>
   <table>
     <tr><th>First Name</th><th>Last Name</th></tr>
-    <% for member in @client.household_members %>
+    <% for member in client.household_members %>
       <tr>
         <td><%= member.first_name %></td>
         <td><%= member.last_name %></td>
@@ -84,12 +86,12 @@
 <div class="form-section">
   <p><strong>If you are authorizing someone else to pick up on your behalf, please print name below or attach proper documentation.</strong></p>
   <label>Additional Notes &amp; Comments:</label>
-  <textarea class="notes" disabled><%= @client.notes %></textarea>
+  <textarea class="notes" disabled><%= client.notes %></textarea>
 </div>
 
 <div class="grid">
 
-  <% @client.visits.each do |visit| %>
+  <% client.visits.each do |visit| %>
     <div style="padding: 5px;">
     <b>Date of Visit</b>
     <span class="underline"><%= visit.user.created_at.strftime("%Y-%m-%d") %></span>

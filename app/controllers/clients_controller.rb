@@ -54,15 +54,15 @@ class ClientsController < ApplicationController
   end
 
   def intake_form
-    @client = Client
+    client = Client
                 .includes(:household_members, visits: [ :user ])
                 .find_by(uuid: params[:uuid])
 
-    if @client.nil?
+    if client.nil?
       return redirect_back fallback_location: dashboard_index_path, alert: 'Client not found!'
     end
 
-    @household_member_counts = @client.member_counts
+    render 'intake_form', locals: { client: client }
   end
 
   def tefap_attestation
