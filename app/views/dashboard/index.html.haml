@@ -13,6 +13,7 @@
     = button_to "Register a New Client", new_client_path, method: :get
 
   = button_to "Visit History", visits_path, method: :get, class: 'outline secondary'
+  = button_to "Bulk Intake Form", intake_form_bulk_index_path, method: :get, class: 'outline secondary'
 
 - if Current.user.admin?
   %article

@@ -26,6 +26,10 @@ Rails.application.routes.draw do
       get 'index', on: :collection
     end
 
+    resources :bulk, only: [] do
+      get 'intake_form', on: :collection
+    end
+
     resources :clients, only: [ :new, :edit, :update ] do
       post 'create', on: :collection
       get 'show', on: :collection, as: 'show'
