@@ -1,6 +1,10 @@
-%article
-  %header
-    %b Client Operations
+.space-y-10
+  %h1.text-3xl.font-bold.text-gray-900 Site Overview
 
-  %h6= "#{@pantries} Pantries"
-  %h6= "#{@household_members} Household Members"
+  .space-y-2
+    .flex.items-center.justify-between.px-6.py-5.border-2.border-gray-900
+      %span.text-xl.font-medium.text-gray-900 Pantries
+      %span.text-2xl.font-bold.text-gray-900= @pantries
+    .flex.items-center.justify-between.px-6.py-5.border-2.border-gray-900
+      %span.text-xl.font-medium.text-gray-900 Household Members
+      %span.text-2xl.font-bold.text-gray-900= @household_members

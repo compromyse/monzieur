@@ -1,83 +1,70 @@
-%article
-  %header
-    %nav
-      %ul
-        %li
-          %b Client Information
-      %ul
-        %li
-          = link_to "QR Code", qr_clients_path(id: @client.id), target: "_blank"
-          |
-          = link_to "Agreement", agreement_clients_path(uuid: @client.uuid), target: "_blank"
-          |
-          = link_to "TEFAP Attestation", tefap_attestation_clients_path(uuid: @client.uuid), target: "_blank"
-          |
-          = link_to "Intake", intake_form_clients_path(uuid: @client.uuid), target: "_blank"
-          |
-          = link_to "Edit", edit_client_path(id: @client.id)
+.space-y-10
+  .flex.items-center.justify-between.flex-wrap.gap-4
+    %h1.text-3xl.font-bold.text-gray-900 Client Information
+    .flex.gap-4.flex-wrap
+      = link_to "QR Code", qr_clients_path(id: @client.id), target: "_blank", class: "text-lg font-medium text-gray-900 underline"
+      = link_to "Agreement", agreement_clients_path(uuid: @client.uuid), target: "_blank", class: "text-lg font-medium text-gray-900 underline"
+      = link_to "TEFAP Attestation", tefap_attestation_clients_path(uuid: @client.uuid), target: "_blank", class: "text-lg font-medium text-gray-900 underline"
+      = link_to "Intake", intake_form_clients_path(uuid: @client.uuid), target: "_blank", class: "text-lg font-medium text-gray-900 underline"
+      = link_to "Edit", edit_client_path(id: @client.id), class: "text-lg font-medium text-gray-900 underline"
 
   - if @client.member_counts.values.sum != @client.household_members.count + 1
-    %article{ style: 'background-color: #060e14;' }
-      = tag.div("Warning: THE CALCULATED HOUSEHOLD MEMBER COUNT DOESN'T EQUAL TO THE SUM OF THE HOUSEHOLD MEMBER COUNTS ENTERED", style: "color: #ffaaaa; text-align: center;")
+    .px-4.py-3.bg-red-100.border.border-red-300.text-red-900.text-lg.text-center
+      Warning: the calculated household member count doesn't equal the sum of the household member counts entered
 
-  %p
-    First Name:
-    = @client.first_name
+  .space-y-2
+    %p.text-lg.text-gray-900
+      %span.text-gray-500 First Name:
+      = @client.first_name
+    %p.text-lg.text-gray-900
+      %span.text-gray-500 Last Name:
+      = @client.last_name
+    %p.text-lg.text-gray-900
+      %span.text-gray-500 Mobile Number:
+      = @client.mobile_number
+    %p.text-lg.text-gray-900
+      %span.text-gray-500 Address:
+      = @client.address or '-'
+    %p.text-lg.text-gray-900
+      %span.text-gray-500 Last Visit:
+      = @client.last_visit
 
-  %p
-    Last Name:
-    = @client.last_name
+  %div
+    %h3.text-xl.font-semibold.text-gray-900.mb-4 Household Members
 
-  %p
-    Mobile Number:
-    = @client.mobile_number
-
-  %p
-    Address:
-    = @client.address or '-'
-
-  %p
-    Last Visit:
-    = @client.last_visit
-
-  %h3 Household Members
-
-  %table
-    - HouseholdMember::MEMBER_TYPES.values.each do |t|
-      %th= t
-
-    %tr
-      - HouseholdMember::MEMBER_TYPES.keys.each do |t|
-        %td= @client.member_counts[t.to_s]
-    %tr
-      %td{ colspan: HouseholdMember::MEMBER_TYPES.keys.count, style: 'text-align: right;' }
-        Total:
-        = @client.member_counts.values.sum
-
-        (incl. client)
-
-
-  %table
-    %thead
-      %th First Name
-      %th Last Name
-
-    %tbody
-      - @client.household_members.each do |member|
+    %table.w-full.text-lg.mb-6
+      %thead
+        %tr.border-b-2.border-gray-900
+          - HouseholdMember::MEMBER_TYPES.values.each do |t|
+            %th.text-left.py-2= t
+      %tbody
+        %tr.border-b.border-gray-200
+          - HouseholdMember::MEMBER_TYPES.keys.each do |t|
+            %td.py-3= @client.member_counts[t.to_s]
         %tr
-          %td= member.first_name
-          %td= member.last_name
+          %td.py-3.text-right{ colspan: HouseholdMember::MEMBER_TYPES.keys.count }
+            Total:
+            = @client.member_counts.values.sum
+            (incl. client)
 
-  %p
-    %b Notes:
-    %br
-    = @client.notes
+    %table.w-full.text-lg
+      %thead
+        %tr.border-b-2.border-gray-900
+          %th.text-left.py-2 First Name
+          %th.text-left.py-2 Last Name
+      %tbody
+        - @client.household_members.each do |member|
+          %tr.border-b.border-gray-200
+            %td.py-3= member.first_name
+            %td.py-3= member.last_name
 
-  %br
+  .space-y-2
+    %p.text-xl.font-medium.text-gray-900 Notes
+    %p.text-lg.text-gray-700= @client.notes
 
-  = button_to "Log Visit", visits_path(visit: { client_id: @client.id }), data: { 'turbo-confirm': 'Are you sure?' }
+  = button_to "Log Visit", visits_path(visit: { client_id: @client.id }), data: { 'turbo-confirm': 'Are you sure?' }, class: "px-6 py-3 text-lg font-bold text-white bg-gray-900 hover:bg-gray-700 cursor-pointer transition-colors"
 
-%details
-  %summary View History
+%details.mt-8
+  %summary.text-lg.font-medium.text-gray-900.underline.cursor-pointer View History
 
   = turbo_frame_tag "show_history", src: visit_history_clients_path(uuid: @client.uuid, format: :turbo_stream), action: :replace, loading: :lazy

@@ -1,29 +1,29 @@
-%article
-  %header
-    %b Client Operations
+.space-y-10
+  %h1.text-3xl.font-bold.text-gray-900 Client Operations
+  %p.text-lg.text-gray-500= "#{@visit_count} visit(s) today"
 
-  %h6= "#{@visit_count} visit(s) today!"
+  #searcharticle
+    -# TODO: Scan functionality
+    %select.w-full.px-4.py-3.text-xl.border-2.border-gray-400.focus:border-gray-900.focus:outline-none{ id: 'search', placeholder: 'Search by Name or Mobile Number..' }
 
-  %article#searcharticle
-    .grid
-      -# TODO: Scan functionality
-      %select{ id: 'search', placeholder: 'Search by Name or Mobile Number..' }
+  .flex.flex-wrap.gap-4
+    = link_to "Register a New Client", new_client_path, class: "px-6 py-3 text-lg font-bold text-white bg-gray-900 hover:bg-gray-700 transition-colors"
+    = link_to "Visit History", visits_path, class: "px-6 py-3 text-lg font-medium text-gray-900 underline"
+    = link_to "Bulk Intake Form", intake_form_bulk_index_path, data: { turbo: false }, class: "px-6 py-3 text-lg font-medium text-gray-900 underline"
 
-  .grid
-    = button_to "Register a New Client", new_client_path, method: :get
-
-  = button_to "Visit History", visits_path, method: :get, class: 'outline secondary'
-  = button_to "Bulk Intake Form", intake_form_bulk_index_path, method: :get, class: 'outline secondary', data: { turbo: false }
-
-- if Current.user.admin?
-  %article
-    %header
-      %b Admin Operations (only visible to admins)
-
-    .grid
-      = button_to "Edit Pantry", edit_pantry_path(Current.pantry.id), method: :get
-      = button_to "Manage Users", pantry_users_path, method: :get
-      = button_to "Import Data", import_csv_form_imports_path, method: :get
+  - if Current.user.admin?
+    .space-y-4
+      %p.text-sm.font-semibold.text-gray-500.uppercase.tracking-widest Admin Operations
+      .space-y-2
+        = link_to edit_pantry_path(Current.pantry.id), class: "flex items-center justify-between px-6 py-5 border-2 border-gray-900 hover:bg-gray-100 transition-colors" do
+          %span.text-2xl.font-bold.text-gray-900 Edit Pantry
+          %span.text-gray-500 →
+        = link_to pantry_users_path, class: "flex items-center justify-between px-6 py-5 border-2 border-gray-900 hover:bg-gray-100 transition-colors" do
+          %span.text-2xl.font-bold.text-gray-900 Manage Users
+          %span.text-gray-500 →
+        = link_to import_csv_form_imports_path, class: "flex items-center justify-between px-6 py-5 border-2 border-gray-900 hover:bg-gray-100 transition-colors" do
+          %span.text-2xl.font-bold.text-gray-900 Import Data
+          %span.text-gray-500 →
 
 :javascript
   new TomSelect('#search',{

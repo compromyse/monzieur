@@ -8,3 +8,39 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/*
+ * Tom Select (client search, app/views/dashboard/index.html.haml) is a third-party
+ * widget loaded from CDN. Its internal class names (.ts-control, .ts-dropdown, ...)
+ * aren't reachable with Tailwind utility classes, so it's reskinned here to match
+ * DESIGN.md's flat black/white/gray system instead of its default theme.
+ */
+.ts-wrapper.single .ts-control,
+.ts-wrapper .ts-control {
+  border: 2px solid #9ca3af; /* gray-400 */
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0.75rem 1rem;
+  font-size: 1.125rem; /* text-lg */
+}
+
+.ts-wrapper.focus .ts-control {
+  border-color: #111827; /* gray-900 */
+  box-shadow: none;
+}
+
+.ts-dropdown {
+  border: 2px solid #111827; /* gray-900 */
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 1.125rem;
+}
+
+.ts-dropdown .option.active {
+  background-color: #f3f4f6; /* gray-100 */
+  color: #111827;
+}
+
+.ts-dropdown .option {
+  border-radius: 0;
+}

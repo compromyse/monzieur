@@ -1,47 +1,50 @@
-%h3 Client Information
+- input_class = "w-full px-4 py-3 text-xl border-2 border-gray-400 focus:border-gray-900 focus:outline-none"
+- label_class = "block text-xl font-medium text-gray-900"
 
-.grid
-  = f.input :first_name
-  = f.input :last_name
-= f.input :mobile_number
-= f.input :address
-= f.input :zipcode
+.space-y-8
+  %h3.text-xl.font-semibold.text-gray-900 Client Information
 
-.grid
-  - HouseholdMember::MEMBER_TYPES.keys.each do |t|
-    = f.input t
+  .grid.grid-cols-2.gap-6
+    = f.input :first_name, label: "First Name", wrapper_html: { class: "space-y-2" }, label_html: { class: label_class }, input_html: { class: input_class }
+    = f.input :last_name, label: "Last Name", wrapper_html: { class: "space-y-2" }, label_html: { class: label_class }, input_html: { class: input_class }
+  = f.input :mobile_number, label: "Mobile Number", wrapper_html: { class: "space-y-2" }, label_html: { class: label_class }, input_html: { class: input_class }
+  = f.input :address, label: "Address", wrapper_html: { class: "space-y-2" }, label_html: { class: label_class }, input_html: { class: input_class }
+  = f.input :zipcode, label: "Zip Code", wrapper_html: { class: "space-y-2" }, label_html: { class: label_class }, input_html: { class: input_class }
 
-%h3 Household Members
-%table
-  %thead
-    %th First Name
-    %th Last Name
-    %th Actions
+  .grid.grid-cols-3.gap-6
+    - HouseholdMember::MEMBER_TYPES.each do |t, label|
+      = f.input t, label: label, wrapper_html: { class: "space-y-2" }, label_html: { class: label_class }, input_html: { class: input_class }
 
-  %tbody{ 'data-nested-fields-target': 'fields' }
-    - @client.household_members.each do |member|
-      %tr
-        = simple_fields_for 'client[household_members_attributes][]', member, index: member.id do |hm_f|
-          = hm_f.hidden_field :id
-          = hm_f.hidden_field :_destroy
+  %h3.text-xl.font-semibold.text-gray-900 Household Members
+  %table.w-full.text-lg
+    %thead
+      %tr.border-b-2.border-gray-900
+        %th.text-left.py-2 First Name
+        %th.text-left.py-2 Last Name
+        %th.text-left.py-2 Actions
+
+    %tbody{ 'data-nested-fields-target': 'fields' }
+      - @client.household_members.each do |member|
+        %tr.border-b.border-gray-200
+          = simple_fields_for 'client[household_members_attributes][]', member, index: member.id do |hm_f|
+            = hm_f.hidden_field :id
+            = hm_f.hidden_field :_destroy
+            = render 'form_household_members', hm_f: hm_f
+
+            %td.py-3
+              = button_tag "Remove", type: :button, data: { action: 'nested-fields#remove' }, class: "text-lg font-medium text-red-700 underline"
+
+    %template{ 'data-nested-fields-target': 'template' }
+      %tr{ data: { new_record: "true" } }
+        = simple_fields_for 'client[household_members_attributes][]', HouseholdMember.new, index: '__INDEX__' do |hm_f|
           = render 'form_household_members', hm_f: hm_f
 
-          %td
-            %button{ data: { action: 'nested-fields#remove' } } Remove
+          %td.py-3
+            = button_tag "Remove", type: :button, data: { action: 'nested-fields#remove' }, class: "text-lg font-medium text-red-700 underline"
 
-  %template{ 'data-nested-fields-target': 'template' }
-    %tr{ data: { new_record: "true" } }
-      = simple_fields_for 'client[household_members_attributes][]', HouseholdMember.new, index: '__INDEX__' do |hm_f|
-        = render 'form_household_members', hm_f: hm_f
+  -# TODO: when the totals change, just add as many fields as needed for household members
+  = button_tag "Add Member", type: :button, data: { action: "nested-fields#append" }, class: "px-6 py-3 text-lg font-medium text-gray-900 underline"
 
-        %td
-          %button{ data: { action: 'nested-fields#remove' } } Remove
+  = f.input :notes, as: :text, label: "Notes", wrapper_html: { class: "space-y-2" }, label_html: { class: label_class }, input_html: { class: input_class + " h-32" }
 
--# TODO: when the totals change, just add as many fields as needed for household members
-= button_tag "Add Member", type: :button, data: { action: "nested-fields#append" }
-
-= f.input :notes, as: :text
-
-%br
-%br
-= f.submit
+  = f.submit "Save", class: "px-6 py-3 text-lg font-bold text-white bg-gray-900 hover:bg-gray-700 cursor-pointer transition-colors"

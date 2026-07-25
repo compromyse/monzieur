@@ -1,28 +1,15 @@
-%article
-  %header
-    %b Manage Users
+.space-y-10
+  %h1.text-3xl.font-bold.text-gray-900 Manage Users
 
-  %table
-    %tr
-      %th Username
-      %th Actions
-
+  .space-y-2
     - @users.each do |u|
-      %tr
-        %td= u.username
-        %td
-          - if u.username == Current.user.username
-            Remove
-          - else
-            = link_to "Remove", pantry_remove_user_path(username: u.username)
+      .flex.items-center.justify-between.px-6.py-5.border-2.border-gray-900
+        %p.text-2xl.font-bold.text-gray-900= u.username
+        - unless u.username == Current.user.username
+          = link_to "Remove", pantry_remove_user_path(username: u.username), class: "text-lg font-medium text-red-700 underline shrink-0"
 
-  %br
-  %br
-
-  %article
-    %header
-      Add User
-
-    = form_with url: pantry_add_user_path, method: :post do |f|
-      = f.text_field :username, required: true
-      = f.submit "Add"
+  .space-y-4
+    %p.text-sm.font-semibold.text-gray-500.uppercase.tracking-widest Add User
+    = form_with url: pantry_add_user_path, method: :post, class: "flex gap-4 max-w-lg" do |f|
+      = f.text_field :username, required: true, class: "flex-1 px-4 py-3 text-xl border-2 border-gray-400 focus:border-gray-900 focus:outline-none"
+      = f.submit "Add", class: "px-6 py-3 text-lg font-bold text-white bg-gray-900 hover:bg-gray-700 cursor-pointer transition-colors"

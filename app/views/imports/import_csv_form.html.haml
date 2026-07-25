@@ -1,15 +1,13 @@
-%article
-  %header
-    %b Import Clients from CSV
+.space-y-8
+  %h1.text-3xl.font-bold.text-gray-900 Import Clients from CSV
 
-  = form_with url: import_csv_imports_path do |f|
-    .grid
-      %div
-        = f.label "Full List"
-        = f.file_field :full_list, required: true
+  = form_with url: import_csv_imports_path, class: "space-y-6 max-w-lg" do |f|
+    .space-y-2
+      = f.label "Full List", class: "block text-xl font-medium text-gray-900"
+      = f.file_field :full_list, required: true, class: "w-full text-lg"
 
-      %div
-        = f.label "Client Only"
-        = f.file_field :clients, required: true
+    .space-y-2
+      = f.label "Client Only", class: "block text-xl font-medium text-gray-900"
+      = f.file_field :clients, required: true, class: "w-full text-lg"
 
-    = f.submit "Import Clients"
+    = f.submit "Import Clients", class: "px-6 py-3 text-lg font-bold text-white bg-gray-900 hover:bg-gray-700 cursor-pointer transition-colors"

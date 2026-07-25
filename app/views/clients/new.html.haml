@@ -1,6 +1,5 @@
-%article
-  %header
-    %b Register a New Client
+.space-y-8
+  %h1.text-3xl.font-bold.text-gray-900 Register a New Client
 
   = simple_form_for @client, data: { controller: 'nested-fields' } do |f|
     = render 'form', f: f

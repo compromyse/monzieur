@@ -5,33 +5,26 @@
     %title= content_for(:title) || get_title
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
     %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
-    %meta{:content => "Monzieur", :name => "application-name"}/
+    %meta{:content => "Pantrie", :name => "application-name"}/
     %meta{:content => "yes", :name => "mobile-web-app-capable"}/
     = csrf_meta_tags
     = csp_meta_tag
     = yield :head
     %link{:href => "/icon.png", :rel => "icon", :type => "image/png"}/
     %link{:href => "/icon.png", :rel => "apple-touch-icon"}/
+    = stylesheet_link_tag "tailwind", "data-turbo-track": "reload"
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_importmap_tags
+  %body.bg-white.min-h-screen
+    %nav.border-b-2.border-gray-900.px-6.py-4.flex.items-center.justify-between
+      = link_to "Pantrie Admin", admin_index_path, class: "text-2xl font-bold text-gray-900"
+      = link_to "Log Out", session_path, data: { turbo_method: :delete }, class: "text-lg font-medium text-gray-900 underline"
 
-    %link{:href => "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.sand.min.css", :rel => "stylesheet"}/
+    - if flash[:notice].present?
+      .px-6.py-3.bg-green-100.border-b.border-green-300.text-green-900.text-lg= flash[:notice]
 
-    %link{ href: "https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/css/tom-select.css", rel: "stylesheet" }
-    %script{ src: "https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js" }
-  %body
-    %main.container
+    - if flash[:alert].present?
+      .px-6.py-3.bg-red-100.border-b.border-red-300.text-red-900.text-lg= flash[:alert]
 
-      - if flash[:notice].present?
-        %article
-          .grid
-            %textarea{ 'aria-invalid': 'false', readonly: true, style: 'resize: none;' }
-              = flash[:notice]
-
-      - if flash[:alert].present?
-        %article
-          .grid
-            %textarea{ 'aria-invalid': 'true', readonly: true, style: 'resize: none;' }
-              = flash[:alert]
-
+    .px-6.py-8
       = yield

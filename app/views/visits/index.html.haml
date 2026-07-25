@@ -1,45 +1,35 @@
-:css
-  @media print {
-    .no-print {
-      display: none !important;
-    }
-  }
+.space-y-10
+  .flex.items-center.justify-between.flex-wrap.gap-4
+    %h1.text-3xl.font-bold.text-gray-900 Visit History
+    = link_to "Daily Sign-in Sheet", daily_signin_visits_path(date: params[:date]), data: { turbo: false }, class: "text-lg font-medium text-gray-900 underline"
 
-%article
-  %header
-    %nav
-      %ul
-        %li
-          %b Visit History
-      %ul
-        %li
-          = link_to "Daily Sign-in Sheet", daily_signin_visits_path(date: params[:date]), data: { turbo: false }
+  %div{ class: "print:hidden" }
+    = form_with url: url_for, method: :get, class: "flex gap-4 items-end" do |f|
+      .space-y-2
+        = f.label :date, "Date", class: "block text-xl font-medium text-gray-900"
+        = f.date_field :date, value: (params[:date] or Time.current.strftime("%Y-%m-%d")), class: "px-4 py-3 text-xl border-2 border-gray-400 focus:border-gray-900 focus:outline-none"
+      = f.submit "Select", class: "px-6 py-3 text-lg font-bold text-white bg-gray-900 hover:bg-gray-700 cursor-pointer transition-colors"
 
-  .no-print
-    = form_with url: url_for, method: :get do |f|
-      .grid
-        = f.date_field :date, value: (params[:date] or Time.current.strftime("%Y-%m-%d"))
-        = f.submit 'Select'
+  .space-y-1
+    %p.text-lg.text-gray-900
+      %span.text-gray-500 Date:
+      = params[:date] or Time.current.strftime("%Y-%m-%d")
+    %p.text-lg.text-gray-900
+      %span.text-gray-500 Total Visits:
+      = @visits.count
 
-  %h5
-    Date:
-    = params[:date] or Time.current.strftime("%Y-%m-%d")
-  %h5
-    Total Visits:
-    = @visits.count
-
-  %table
+  %table.w-full.text-lg
     %thead
-      %th Time
-      %th Name
-      %th Address
-      %th Household Size
+      %tr.border-b-2.border-gray-900
+        %th.text-left.py-2 Time
+        %th.text-left.py-2 Name
+        %th.text-left.py-2 Address
+        %th.text-left.py-2 Household Size
 
     %tbody
-
       - @visits.each do |visit|
-        %tr
-          %td= visit.created_at.strftime("%H:%M")
-          %td= link_to visit.client.name, show_clients_path(uuid: visit.client.uuid)
-          %td= visit.client.address
-          %td= visit.client.household_members.length
+        %tr.border-b.border-gray-200
+          %td.py-3= visit.created_at.strftime("%H:%M")
+          %td.py-3= link_to visit.client.name, show_clients_path(uuid: visit.client.uuid), class: "text-gray-900 underline"
+          %td.py-3= visit.client.address
+          %td.py-3= visit.client.household_members.length

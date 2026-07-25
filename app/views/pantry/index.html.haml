@@ -1,8 +1,10 @@
-%article
-  %header
-    %b Select a Pantry to Manage
+.space-y-10
+  %h1.text-3xl.font-bold.text-gray-900 Select a Pantry to Manage
 
-  - @pantries.each do |p|
-    = button_to p.name, dashboard_index_path(pantry_id: p.id), method: :get
+  .space-y-2
+    - @pantries.each do |p|
+      = link_to dashboard_index_path(pantry_id: p.id), class: "flex items-center justify-between px-6 py-5 border-2 border-gray-900 hover:bg-gray-100 transition-colors" do
+        %span.text-2xl.font-bold.text-gray-900= p.name
+        %span.text-gray-500 →
 
-  = link_to "Create a New Pantry", new_pantry_path
+  = link_to "Create a New Pantry", new_pantry_path, class: "px-6 py-3 text-lg font-bold text-white bg-gray-900 hover:bg-gray-700 transition-colors"

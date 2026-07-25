@@ -1,11 +1,12 @@
 = turbo_stream.replace 'show_history' do
-  %article
+  .space-y-6.mt-4
     - @visits.each do |year, items|
-      %b= year
+      .space-y-2
+        %p.text-xl.font-semibold.text-gray-900= year
 
-      - items.each do |month, visits|
-        %p
-          = "#{month} (#{visits.count}):"
-          - visits.each do |visit|
-            = "#{visit.created_at.day.ordinalize} (#{visit.user.username})"
-            &nbsp;
+        - items.each do |month, visits|
+          %p.text-lg.text-gray-700
+            = "#{month} (#{visits.count}):"
+            - visits.each do |visit|
+              = "#{visit.created_at.day.ordinalize} (#{visit.user.username})"
+              &nbsp;

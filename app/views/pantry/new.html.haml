@@ -1,8 +1,9 @@
-%article
-  %header
-    %b Create a New Pantry
+.space-y-8
+  %h1.text-3xl.font-bold.text-gray-900 Create a New Pantry
 
-  = simple_form_for @pantry, url: pantry_index_path do |f|
+  = simple_form_for @pantry, url: pantry_index_path, html: { class: "space-y-8 max-w-lg" } do |f|
     = render 'form', f: f
 
-    = f.submit
+    .flex.gap-4
+      = f.submit "Create", class: "px-6 py-3 text-lg font-bold text-white bg-gray-900 hover:bg-gray-700 cursor-pointer transition-colors"
+      = link_to "Cancel", root_path, class: "px-6 py-3 text-lg font-medium text-gray-900 underline"

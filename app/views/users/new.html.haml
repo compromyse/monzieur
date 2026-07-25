@@ -1,13 +1,16 @@
-%article
-  %h1 Register
+.max-w-lg.mx-auto.space-y-8
+  %h1.text-3xl.font-bold.text-gray-900 Register
 
-  = tag.div(flash[:alert], style: "color:red") if flash[:alert]
-  = tag.div(flash[:notice], style: "color:green") if flash[:notice]
+  - if flash[:alert]
+    .px-4.py-3.bg-red-100.border.border-red-300.text-red-900.text-lg= flash[:alert]
+  - if flash[:notice]
+    .px-4.py-3.bg-green-100.border.border-green-300.text-green-900.text-lg= flash[:notice]
 
-  = form_with url: user_path do |form|
-    = form.text_field :username, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter a username", value: params[:username]
-    %br/
-    = form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter a password", maxlength: 72
-    %br/
-    = form.submit "Create"
-  %br/
+  = form_with url: user_path, class: "space-y-6" do |form|
+    .space-y-2
+      = form.label :username, "Username", class: "block text-xl font-medium text-gray-900"
+      = form.text_field :username, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter a username", value: params[:username], class: "w-full px-4 py-3 text-xl border-2 border-gray-400 focus:border-gray-900 focus:outline-none"
+    .space-y-2
+      = form.label :password, "Password", class: "block text-xl font-medium text-gray-900"
+      = form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter a password", maxlength: 72, class: "w-full px-4 py-3 text-xl border-2 border-gray-400 focus:border-gray-900 focus:outline-none"
+    = form.submit "Create", class: "px-6 py-3 text-lg font-bold text-white bg-gray-900 hover:bg-gray-700 cursor-pointer transition-colors"
