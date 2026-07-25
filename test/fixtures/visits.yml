@@ -1,0 +1,17 @@
+jane_visit_today:
+  client: jane
+  pantry: main
+  user: staff
+  created_at: <%= Time.current %>
+
+jane_visit_yesterday:
+  client: jane
+  pantry: main
+  user: staff
+  created_at: <%= 1.day.ago %>
+
+second_pantry_visit_today:
+  client: second_pantry_client
+  pantry: second
+  user: second_pantry_owner
+  created_at: <%= Time.current %>

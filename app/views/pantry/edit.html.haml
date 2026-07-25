@@ -6,4 +6,4 @@
 
     .flex.gap-4
       = f.submit "Save", class: "px-6 py-3 text-lg font-bold text-white bg-gray-900 hover:bg-gray-700 cursor-pointer transition-colors"
-      = link_to "Cancel", dashboard_index_path, class: "px-6 py-3 text-lg font-medium text-gray-900 underline"
+      = link_to "Cancel", dashboard_index_path(pantry_id: @pantry.id), class: "px-6 py-3 text-lg font-medium text-gray-900 underline"

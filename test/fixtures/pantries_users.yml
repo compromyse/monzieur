@@ -1,0 +1,19 @@
+owner_main:
+  user: owner
+  pantry: main
+  role: owner
+
+admin_main:
+  user: admin
+  pantry: main
+  role: admin
+
+staff_main:
+  user: staff
+  pantry: main
+  role: staff
+
+second_pantry_owner_second:
+  user: second_pantry_owner
+  pantry: second
+  role: owner

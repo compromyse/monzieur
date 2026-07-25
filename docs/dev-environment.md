@@ -32,7 +32,11 @@ bundle exec rubocop
 bundle exec bundler-audit
 ```
 
-There is no test suite yet — see the Testing section in `CLAUDE.md`.
+Test database is `monzieur_test` (a separate database from development — see `config/database.yml`). Run with `PGDATA=$(pwd)/pgdata rails test`. See the Testing section in `CLAUDE.md` for fixture/`Current` conventions.
+
+## Git hooks
+
+`git config core.hooksPath .githooks` is set for this repo. `.githooks/pre-commit` and `.githooks/pre-push` both run the full test suite and abort the commit/push on failure.
 
 ## Tailwind
 

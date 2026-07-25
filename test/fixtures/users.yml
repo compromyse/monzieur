@@ -1,0 +1,30 @@
+# password for all users is "password"
+owner:
+  username: owner
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  site_admin: false
+
+admin:
+  username: admin
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  site_admin: false
+
+staff:
+  username: staff
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  site_admin: false
+
+second_pantry_owner:
+  username: second_pantry_owner
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  site_admin: false
+
+site_admin_user:
+  username: site_admin_user
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  site_admin: true
+
+no_pantry_user:
+  username: no_pantry_user
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  site_admin: false

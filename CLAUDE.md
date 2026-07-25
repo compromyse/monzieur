@@ -41,7 +41,13 @@ Write commit messages with a subject line and a body. The body should explain wh
 
 ## Testing
 
-There is currently no test suite in this app (no `test/` directory). Don't assume tests exist or can be run — verify behavior by starting the app (`bin/dev`) and exercising the affected flow manually. If you add a test framework or the first tests, update this section with the run command.
+Every new feature and every change to existing behaviour must have tests before committing. Run the full suite with `PGDATA=$(pwd)/pgdata rails test` and confirm it passes. Do not commit with failing or missing tests.
+
+Plain Rails Minitest + fixtures (`test/fixtures/*.yml`), no RSpec/FactoryBot. Model tests live in `test/models`, controller/request tests in `test/controllers` (using `ActionDispatch::IntegrationTest` against real named routes, not `assigns`-style unit controller tests). All fixture users' password is `"password"`.
+
+`Client`, `HouseholdMember`, `Visit`, and `Pantry` read `Current.pantry`/`Current.user` in a `default_scope` (see `docs/architecture/multi-tenancy.md`) — model tests that touch them must set `Current.pantry =` / `Current.session =` explicitly (there's no request cycle to populate `Current` automatically). Note `Current.user` has no setter — it's delegated from `Current.session.user`, so set `Current.session = sessions(:some_fixture)` or `Session.new(user: ...)`, not `Current.user =` directly. Controller/integration tests don't need this — logging in via `sign_in_as(user)` (in `test/test_helper.rb`) and passing `pantry_id:` to path helpers populates `Current` the same way a real request does.
+
+The test database is `monzieur_test` (deliberately different from the `monzieur` development database in `config/database.yml` — don't merge those back to the same name, `rails test` would wipe dev data).
 
 ## Documentation
 
