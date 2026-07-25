@@ -62,9 +62,11 @@ Minimum font size for any interactive element is `text-lg`. Never go smaller on 
 
 ## Layout
 
+- Page is a centered column: `max-w-5xl mx-auto` wraps everything in the body
+  (nav included), not full-bleed to the viewport edges — the page background
+  (`bg-white`) shows on either side on wide screens
 - Page padding: `px-6 py-8` (applied by the layout, not individual views)
 - Max width on forms: `max-w-lg`
-- Max width on content pages: none by default — let content breathe
 - Vertical spacing between major sections: `space-y-10` or `mb-8`
 - Vertical spacing between list rows: `space-y-2`
 

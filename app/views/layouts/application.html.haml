@@ -19,14 +19,15 @@
     %link{ href: "https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/css/tom-select.css", rel: "stylesheet" }
     %script{ src: "https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js" }
   %body.bg-white.min-h-screen
-    - if authenticated?
-      = render 'navbar'
+    .max-w-5xl.mx-auto
+      - if authenticated?
+        = render 'navbar'
 
-    - if flash[:notice].present?
-      .px-6.py-3.bg-green-100.border-b.border-green-300.text-green-900.text-lg= flash[:notice]
+      - if flash[:notice].present?
+        .px-6.py-3.bg-green-100.border-b.border-green-300.text-green-900.text-lg= flash[:notice]
 
-    - if flash[:alert].present?
-      .px-6.py-3.bg-red-100.border-b.border-red-300.text-red-900.text-lg= flash[:alert]
+      - if flash[:alert].present?
+        .px-6.py-3.bg-red-100.border-b.border-red-300.text-red-900.text-lg= flash[:alert]
 
-    .px-6.py-8
-      = yield
+      .px-6.py-8
+        = yield
