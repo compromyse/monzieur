@@ -2,9 +2,9 @@
   %h1.text-3xl.font-bold.text-gray-900 Client Operations
   %p.text-lg.text-gray-500= "#{@visit_count} visit(s) today"
 
-  #searcharticle
+  #searcharticle{ data: { controller: 'client-search', client_search_find_url_value: find_clients_path, client_search_show_url_value: show_clients_path } }
     -# TODO: Scan functionality
-    %select.w-full.px-4.py-3.text-xl.border-2.border-gray-400.focus:border-gray-900.focus:outline-none{ id: 'search', placeholder: 'Search by Name or Mobile Number..' }
+    %select.w-full.px-4.py-3.text-xl.border-2.border-gray-400.focus:border-gray-900.focus:outline-none{ id: 'search', placeholder: 'Search by Name or Mobile Number..', data: { client_search_target: 'select' } }
 
   .flex.flex-wrap.gap-4
     = link_to "Register a New Client", new_client_path, class: "px-6 py-3 text-lg font-bold text-white bg-gray-900 hover:bg-gray-700 transition-colors"
@@ -24,41 +24,3 @@
         = link_to import_csv_form_imports_path, class: "flex items-center justify-between px-6 py-5 border-2 border-gray-900 hover:bg-gray-100 transition-colors" do
           %span.text-2xl.font-bold.text-gray-900 Import Data
           %span.text-gray-500 →
-
-:javascript
-  new TomSelect('#search',{
-          valueField: 'uuid',
-          labelField: 'first_name',
-          searchField: [ 'first_name', 'last_name', 'mobile_number' ],
-
-          load: function(query, callback) {
-
-            var url = "#{find_clients_path}?q=" + encodeURIComponent(query);
-              fetch(url)
-                  .then(response => response.json())
-                  .then(json => {
-                      callback(json);
-                  })
-
-          },
-          
-          onItemAdd: function(uuid) {
-            document.getElementById('searcharticle').innerHTML = '';
-            document.getElementById('searcharticle').ariaBusy = 'true';
-            window.location.href = "#{show_clients_path}?uuid=" + uuid;
-          },
-
-          render:{
-            item: function(data, escape) {
-              return `<div>${data.first_name} ${data.last_name} (${data.mobile_number})</div>`
-            },
-            option: function(data, escape) {
-              return `<div>${data.first_name} ${data.last_name} (${data.mobile_number})</div>`
-            },
-          }
-
-      });
-
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById("search-ts-control").focus();
-  }, false);
