@@ -162,6 +162,24 @@ class PantryControllerTest < ActionDispatch::IntegrationTest
     assert_not_equal "Hacked", pantries(:main).name
   end
 
+  test "MULTI-TENANCY: update 404s for a pantry the user does not belong to" do
+    sign_in_as(users(:second_pantry_owner)) # owner of :second, not :main
+
+    patch pantry_path(id: pantries(:main).id), params: { pantry: { name: "Hacked" } }
+
+    assert_response :not_found
+    assert_not_equal "Hacked", pantries(:main).reload.name
+  end
+
+  test "MULTI-TENANCY: update 404s for a user with no pantry membership at all" do
+    sign_in_as(users(:no_pantry_user))
+
+    patch pantry_path(id: pantries(:main).id), params: { pantry: { name: "Hacked" } }
+
+    assert_response :not_found
+    assert_not_equal "Hacked", pantries(:main).reload.name
+  end
+
   # ---------------------------------------------------------------------
   # users / add_user / remove_user
   # ---------------------------------------------------------------------

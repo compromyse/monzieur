@@ -372,6 +372,15 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Client not found!", flash[:alert]
   end
 
+  test "MULTI-TENANCY: tefap_attestation does not leak a client from another pantry" do
+    sign_in_as(users(:owner)) # :main
+
+    get tefap_attestation_clients_path(pantry_id: pantries(:main).id, uuid: clients(:second_pantry_client).uuid)
+
+    assert_redirected_to dashboard_index_path(pantry_id: pantries(:main).id)
+    assert_equal "Client not found!", flash[:alert]
+  end
+
   test "agreement renders successfully for a valid uuid" do
     sign_in_as(users(:staff))
 
@@ -384,6 +393,15 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(users(:staff))
 
     get agreement_clients_path(pantry_id: pantries(:main).id, uuid: "00000000-0000-0000-0000-000000000000")
+
+    assert_redirected_to dashboard_index_path(pantry_id: pantries(:main).id)
+    assert_equal "Client not found!", flash[:alert]
+  end
+
+  test "MULTI-TENANCY: agreement does not leak a client from another pantry" do
+    sign_in_as(users(:owner)) # :main
+
+    get agreement_clients_path(pantry_id: pantries(:main).id, uuid: clients(:second_pantry_client).uuid)
 
     assert_redirected_to dashboard_index_path(pantry_id: pantries(:main).id)
     assert_equal "Client not found!", flash[:alert]
